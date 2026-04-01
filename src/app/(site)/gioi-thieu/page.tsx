@@ -21,8 +21,8 @@ export default function AboutPage() {
       {/* Hero */}
       <div className="relative h-72 md:h-96">
         <Image
-          src="https://images.unsplash.com/photo-1565793979732-8ae1cc8a5e55?w=1600&q=80"
-          alt="Xưởng Gỗ Hoàng Huân"
+          src="https://images.unsplash.com/photo-1504198322253-cfa87a0ff25f?w=1600&q=80"
+          alt="Xưởng Gỗ Hoàng Huân - nhà gỗ cổ truyền"
           fill
           className="object-cover"
           priority
