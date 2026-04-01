@@ -1,26 +1,52 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-cormorant: var(--font-cormorant);
+  --font-be-vietnam: var(--font-be-vietnam);
+
+  --color-wood-50: #faf7f2;
+  --color-wood-100: #f0e9df;
+  --color-wood-200: #e2d5c3;
+  --color-wood-300: #c9a98a;
+  --color-wood-400: #b08060;
+  --color-wood-500: #8b5e3c;
+  --color-wood-600: #5a280e;
+  --color-wood-700: #3d1a08;
+  --color-wood-800: #2a1005;
+  --color-wood-900: #1a0903;
+
+  --color-gold-400: #d4b56a;
+  --color-gold-500: #c9a14a;
+  --color-gold-600: #a8832e;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-be-vietnam), sans-serif;
+  background-color: #faf7f2;
+  color: #1a1a1a;
+}
+
+.font-cormorant {
+  font-family: var(--font-cormorant), Georgia, serif;
+}
+
+.section-heading {
+  font-family: var(--font-cormorant), Georgia, serif;
+  font-size: 2.5rem;
+  line-height: 1.2;
+  font-weight: 600;
+}
+
+@media (max-width: 768px) {
+  .section-heading {
+    font-size: 2rem;
+  }
 }

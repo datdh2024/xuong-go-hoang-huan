@@ -1,0 +1,77 @@
+import type { Metadata } from "next";
+import Image from "next/image";
+import { Phone, Mail, MapPin, Clock, Facebook, Youtube } from "lucide-react";
+import QuoteForm from "@/components/sections/QuoteForm";
+import { SITE_SETTINGS } from "@/lib/data";
+
+export const metadata: Metadata = {
+  title: "Liên hệ",
+  description: "Liên hệ với Xưởng Gỗ Hoàng Huân để được tư vấn và báo giá thi công nhà gỗ cổ truyền miễn phí.",
+};
+
+export default function ContactPage() {
+  return (
+    <div className="pt-24">
+      {/* Hero */}
+      <div className="relative h-56 md:h-72">
+        <Image
+          src="https://images.unsplash.com/photo-1449824913935-59a10b8d2000?w=1600&q=80"
+          alt="Liên hệ"
+          fill
+          className="object-cover"
+          priority
+        />
+        <div className="absolute inset-0 bg-black/60 flex items-center justify-center">
+          <div className="text-center">
+            <p className="text-gold-400 text-sm tracking-widest uppercase mb-2">Liên lạc</p>
+            <h1 className="font-cormorant text-4xl md:text-6xl font-bold text-white italic">Liên Hệ</h1>
+          </div>
+        </div>
+      </div>
+
+      {/* Contact info */}
+      <section className="py-16">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
+            {[
+              { icon: Phone, label: "Điện thoại", value: SITE_SETTINGS.phone, href: `tel:${SITE_SETTINGS.phoneRaw}` },
+              { icon: Mail, label: "Email", value: SITE_SETTINGS.email, href: `mailto:${SITE_SETTINGS.email}` },
+              { icon: MapPin, label: "Địa chỉ", value: SITE_SETTINGS.address, href: undefined },
+              { icon: Clock, label: "Giờ làm việc", value: SITE_SETTINGS.workingHours, href: undefined },
+            ].map(({ icon: Icon, label, value, href }) => (
+              <div key={label} className="bg-wood-50 border border-wood-100 rounded-lg p-5 text-center">
+                <div className="w-10 h-10 bg-wood-600 rounded-lg flex items-center justify-center mx-auto mb-3">
+                  <Icon size={18} className="text-gold-400" />
+                </div>
+                <p className="text-xs text-gray-400 uppercase tracking-wider mb-1">{label}</p>
+                {href ? (
+                  <a href={href} className="text-sm font-medium text-wood-700 hover:text-wood-500 transition-colors">{value}</a>
+                ) : (
+                  <p className="text-sm font-medium text-wood-700">{value}</p>
+                )}
+              </div>
+            ))}
+          </div>
+
+          {/* Social */}
+          <div className="text-center mb-6">
+            <p className="text-gray-500 text-sm mb-3">Theo dõi chúng tôi</p>
+            <div className="flex justify-center gap-3">
+              <a href={SITE_SETTINGS.facebookUrl} target="_blank" rel="noreferrer"
+                className="flex items-center gap-2 px-4 py-2 border border-wood-200 rounded hover:bg-wood-600 hover:text-white hover:border-wood-600 transition-colors text-sm text-wood-600">
+                <Facebook size={16} /> Facebook
+              </a>
+              <a href={SITE_SETTINGS.youtubeUrl} target="_blank" rel="noreferrer"
+                className="flex items-center gap-2 px-4 py-2 border border-wood-200 rounded hover:bg-wood-600 hover:text-white hover:border-wood-600 transition-colors text-sm text-wood-600">
+                <Youtube size={16} /> YouTube
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Quote form reuse */}
+      <QuoteForm />
+    </div>
+  );
+}
