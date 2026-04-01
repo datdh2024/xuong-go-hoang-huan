@@ -39,6 +39,9 @@ yarn-error.log*
 # worktrees
 .worktrees/
 
+# chrome profile for playwright
+/chrome-profile
+
 # typescript
 *.tsbuildinfo
 next-env.d.ts

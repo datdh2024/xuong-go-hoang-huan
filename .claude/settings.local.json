@@ -1,0 +1,26 @@
+{
+  "permissions": {
+    "allow": [
+      "Skill(playwright-cli)",
+      "Bash(playwright-cli eval:*)",
+      "Bash(playwright-cli snapshot:*)",
+      "Bash(playwright-cli click:*)",
+      "Bash(playwright-cli type:*)",
+      "Bash(playwright-cli press:*)",
+      "Bash(playwright-cli screenshot:*)",
+      "Bash(playwright-cli resize:*)",
+      "Bash(playwright-cli console:*)",
+      "Bash(playwright-cli run-code \"async page => {:*)",
+      "Bash(playwright-cli run-code:*)",
+      "Bash(playwright-cli network:*)",
+      "Bash(ls E:/work/repositories/claude_ai/xuong-go-hoang-huan/*.png)",
+      "Bash(npm install:*)",
+      "Bash(npx vitest:*)",
+      "Bash(npm run:*)",
+      "Bash(playwright-cli close:*)",
+      "Bash(playwright-cli open:*)",
+      "Bash(playwright-cli goto:*)",
+      "Bash(playwright-cli state-save:*)"
+    ]
+  }
+}

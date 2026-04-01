@@ -155,3 +155,7 @@ After all unit and integration tests pass via TDD, you **MUST** run E2E tests to
 - [ ] E2E tests pass for the full flow (`npm run test:e2e`).
 - [ ] Test coverage is 100% passing without any errors.
 - [ ] No regressions (all previously written tests still pass).
+
+# Notes:
+
+- Don't add future feature descriptions or codes when update CLAUDE.md
