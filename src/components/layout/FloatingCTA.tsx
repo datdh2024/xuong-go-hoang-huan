@@ -34,6 +34,7 @@ export default function FloatingCTA() {
         target="_blank"
         rel="noreferrer"
         title="Chat Zalo"
+        aria-label="Liên hệ qua Zalo"
         className="group relative flex items-center justify-center w-12 h-12 bg-blue-500 hover:bg-blue-600 text-white rounded-full shadow-lg transition-all hover:scale-110"
       >
         <ZaloIcon />
@@ -46,6 +47,7 @@ export default function FloatingCTA() {
       <a
         href={`tel:${SITE_SETTINGS.phoneRaw}`}
         title="Gọi ngay"
+        aria-label="Gọi điện thoại"
         className="group relative flex items-center justify-center w-12 h-12 bg-gold-500 hover:bg-gold-600 text-wood-800 rounded-full shadow-lg transition-all hover:scale-110 animate-pulse"
       >
         <Phone size={20} />

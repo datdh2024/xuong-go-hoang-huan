@@ -20,7 +20,14 @@
       "Bash(playwright-cli close:*)",
       "Bash(playwright-cli open:*)",
       "Bash(playwright-cli goto:*)",
-      "Bash(playwright-cli state-save:*)"
+      "Bash(playwright-cli state-save:*)",
+      "Bash('[title=\\\\\"Chat Zalo\\\\\"]')",
+      "Skill(task-explorer)",
+      "Bash(npx playwright:*)",
+      "Bash(gh api:*)",
+      "WebFetch(domain:github.com)",
+      "WebFetch(domain:raw.githubusercontent.com)",
+      "Bash(npx playwright-cli:*)"
     ]
   }
 }

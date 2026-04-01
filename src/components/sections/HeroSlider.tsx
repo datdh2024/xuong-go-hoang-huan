@@ -51,10 +51,10 @@ export default function HeroSlider() {
               >
                 {i === current && (
                   <>
-                    <h1 className="font-cormorant text-5xl md:text-7xl font-bold text-white italic leading-tight mb-4">
+                    <h1 className="font-cormorant text-3xl sm:text-5xl md:text-7xl font-bold text-white italic leading-tight mb-4">
                       {slide.headline}
                     </h1>
-                    <p className="text-wood-200 text-lg md:text-xl mb-8 leading-relaxed">
+                    <p className="text-wood-200 text-base md:text-xl mb-8 leading-relaxed">
                       {slide.subheadline}
                     </p>
                     <Link
@@ -72,21 +72,24 @@ export default function HeroSlider() {
       </div>
 
       {/* Arrows */}
-      <button onClick={prev} className="absolute left-4 top-1/2 -translate-y-1/2 z-10 p-2 bg-black/30 hover:bg-black/50 text-white rounded-full transition-colors">
-        <ChevronLeft size={28} />
+      <button onClick={prev} aria-label="Slide trước" className="absolute left-4 top-1/2 -translate-y-1/2 z-10 p-3 bg-black/30 hover:bg-black/50 text-white rounded-full transition-colors min-w-[44px] min-h-[44px] flex items-center justify-center">
+        <ChevronLeft size={24} />
       </button>
-      <button onClick={next} className="absolute right-4 top-1/2 -translate-y-1/2 z-10 p-2 bg-black/30 hover:bg-black/50 text-white rounded-full transition-colors">
-        <ChevronRight size={28} />
+      <button onClick={next} aria-label="Slide tiếp theo" className="absolute right-4 top-1/2 -translate-y-1/2 z-10 p-3 bg-black/30 hover:bg-black/50 text-white rounded-full transition-colors min-w-[44px] min-h-[44px] flex items-center justify-center">
+        <ChevronRight size={24} />
       </button>
 
       {/* Dots */}
-      <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-10 flex gap-2">
+      <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-10 flex gap-1">
         {HERO_SLIDES.map((_, i) => (
           <button
             key={i}
             onClick={() => setCurrent(i)}
-            className={`h-1.5 rounded-full transition-all ${i === current ? "w-8 bg-gold-500" : "w-4 bg-white/50"}`}
-          />
+            aria-label={`Chuyển đến slide ${i + 1}`}
+            className="min-w-[44px] min-h-[44px] flex items-center justify-center"
+          >
+            <span className={`h-1.5 rounded-full transition-all block ${i === current ? "w-8 bg-gold-500" : "w-4 bg-white/50"}`} />
+          </button>
         ))}
       </div>
     </section>

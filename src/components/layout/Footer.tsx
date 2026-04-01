@@ -15,10 +15,12 @@ export default function Footer() {
             <p className="text-sm text-wood-300 italic mb-4">{SITE_SETTINGS.taglineSub}</p>
             <div className="flex gap-3">
               <a href={SITE_SETTINGS.facebookUrl} target="_blank" rel="noreferrer"
+                aria-label="Facebook Xưởng Gỗ Hoàng Huân"
                 className="p-2 bg-wood-600 hover:bg-gold-500 hover:text-wood-800 rounded transition-colors">
                 <Facebook size={18} />
               </a>
               <a href={SITE_SETTINGS.youtubeUrl} target="_blank" rel="noreferrer"
+                aria-label="YouTube Xưởng Gỗ Hoàng Huân"
                 className="p-2 bg-wood-600 hover:bg-gold-500 hover:text-wood-800 rounded transition-colors">
                 <Youtube size={18} />
               </a>

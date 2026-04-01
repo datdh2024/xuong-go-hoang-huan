@@ -29,6 +29,14 @@ Website for a Vietnamese traditional woodworking company specializing in hand-cr
 | 17 | [Dark mode support](./US-17-dark-mode.md) | UX | pending |
 | 18 | [FAQ section (Câu hỏi thường gặp)](./US-18-faq-section.md) | Feature | pending |
 | 19 | [House Template detail page /mau-nha/[slug]](./US-19-template-detail-page.md) | New Page | pending |
+| 20 | [Floating chat popup with contact channels](./US-20-chat-messenger-popup.md) | Feature | pending |
+| 21 | [Greeting message and staff avatar in chat popup](./US-21-chat-popup-greeting.md) | Feature | pending |
+| 22 | [Auto-prompt bubble for first-time visitors](./US-22-chat-auto-prompt.md) | UX | pending |
+| 23 | [Premium 404 page redesign](./US-23-404-page-premium-redesign.md) | Enhancement | pending |
+| 24 | [Fix broken hero image on About page](./US-24-fix-about-hero-image.md) | Bug Fix | pending |
+| 25 | [Image performance optimization across all pages](./US-25-image-performance-optimization.md) | Performance | pending |
+| 26 | [Accessibility improvements for icon-only buttons](./US-26-accessibility-icon-buttons.md) | Accessibility | pending |
+| 27 | [Mobile responsiveness audit and fixes](./US-27-mobile-responsiveness.md) | UX | pending |
 
 ---
 
@@ -40,6 +48,9 @@ Website for a Vietnamese traditional woodworking company specializing in hand-cr
 - **CMS Schema** — Sanity schema extensions
 - **Infrastructure** — SEO, analytics, API hardening
 - **UX** — Loading states, dark mode, lightbox interactions
+- **Bug Fix** — Broken or incorrect behavior
+- **Performance** — Speed and resource optimization
+- **Accessibility** — Screen reader, keyboard nav, WCAG compliance
 
 ## Recommended Priority Order
 
