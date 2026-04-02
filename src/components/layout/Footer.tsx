@@ -1,8 +1,11 @@
 import Link from "next/link";
 import { Phone, Mail, MapPin, Clock, Facebook, Youtube } from "lucide-react";
 import { SITE_SETTINGS } from "@/lib/data";
+import type { SiteSettingsData } from "@/components/layout/Header";
 
-export default function Footer() {
+export default function Footer({ siteSettings = SITE_SETTINGS }: { siteSettings?: SiteSettingsData }) {
+  const phoneHref = siteSettings.phoneRaw ?? siteSettings.phone.replace(/\s/g, '');
+
   return (
     <footer className="bg-wood-700 text-wood-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 py-12">
@@ -10,16 +13,18 @@ export default function Footer() {
           {/* Brand */}
           <div>
             <h3 className="font-cormorant text-2xl font-bold text-gold-500 mb-2">
-              {SITE_SETTINGS.companyName}
+              {siteSettings.companyName}
             </h3>
-            <p className="text-sm text-wood-300 italic mb-4">{SITE_SETTINGS.taglineSub}</p>
+            {siteSettings.taglineSub && (
+              <p className="text-sm text-wood-300 italic mb-4">{siteSettings.taglineSub}</p>
+            )}
             <div className="flex gap-3">
-              <a href={SITE_SETTINGS.facebookUrl} target="_blank" rel="noreferrer"
+              <a href={siteSettings.facebookUrl} target="_blank" rel="noreferrer"
                 aria-label="Facebook Xưởng Gỗ Hoàng Huân"
                 className="p-2 bg-wood-600 hover:bg-gold-500 hover:text-wood-800 rounded transition-colors">
                 <Facebook size={18} />
               </a>
-              <a href={SITE_SETTINGS.youtubeUrl} target="_blank" rel="noreferrer"
+              <a href={siteSettings.youtubeUrl} target="_blank" rel="noreferrer"
                 aria-label="YouTube Xưởng Gỗ Hoàng Huân"
                 className="p-2 bg-wood-600 hover:bg-gold-500 hover:text-wood-800 rounded transition-colors">
                 <Youtube size={18} />
@@ -33,23 +38,23 @@ export default function Footer() {
             <ul className="space-y-3 text-sm">
               <li className="flex gap-3">
                 <MapPin size={16} className="text-gold-500 mt-0.5 shrink-0" />
-                <span>{SITE_SETTINGS.address}</span>
+                <span>{siteSettings.address}</span>
               </li>
               <li className="flex gap-3">
                 <Phone size={16} className="text-gold-500 shrink-0" />
-                <a href={`tel:${SITE_SETTINGS.phoneRaw}`} className="hover:text-gold-500 transition-colors">
-                  {SITE_SETTINGS.phone}
+                <a href={`tel:${phoneHref}`} className="hover:text-gold-500 transition-colors">
+                  {siteSettings.phone}
                 </a>
               </li>
               <li className="flex gap-3">
                 <Mail size={16} className="text-gold-500 shrink-0" />
-                <a href={`mailto:${SITE_SETTINGS.email}`} className="hover:text-gold-500 transition-colors">
-                  {SITE_SETTINGS.email}
+                <a href={`mailto:${siteSettings.email}`} className="hover:text-gold-500 transition-colors">
+                  {siteSettings.email}
                 </a>
               </li>
               <li className="flex gap-3">
                 <Clock size={16} className="text-gold-500 shrink-0" />
-                <span>{SITE_SETTINGS.workingHours}</span>
+                <span>{siteSettings.workingHours}</span>
               </li>
             </ul>
           </div>
@@ -76,7 +81,7 @@ export default function Footer() {
       </div>
 
       <div className="border-t border-wood-600 py-4 text-center text-xs text-wood-400">
-        © {new Date().getFullYear()} {SITE_SETTINGS.companyName}. All rights reserved.
+        © {new Date().getFullYear()} {siteSettings.companyName}. All rights reserved.
       </div>
     </footer>
   );
