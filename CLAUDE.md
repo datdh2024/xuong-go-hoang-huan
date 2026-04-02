@@ -57,7 +57,7 @@ src/app/
   globals.css              ← Tailwind @theme tokens (wood-*, gold-*)
   (site)/                  ← route group for the public website
     layout.tsx             ← wraps all pages with Header + Footer + FloatingCTA
-    page.tsx               ← homepage (HeroSlider → Highlights → ProjectsGrid → HouseTemplates → QuoteForm)
+    page.tsx               ← homepage (HeroSlider → Highlights → ProjectsGrid → HouseTemplates → FaqSection → QuoteForm)
     gioi-thieu/page.tsx    ← About page
     cong-trinh/page.tsx    ← Projects listing
     cong-trinh/[slug]/     ← Project detail
@@ -98,29 +98,17 @@ ZALO_ADMIN_USER_ID      # optional: Zalo recipient
 
 ## Feature work
 
-All pending features are tracked as user stories in `docs/user-stories/`. Each file (`US-XX-*.md`) contains the full acceptance criteria and the exact files to touch. Read the relevant story before starting any feature.
-
-US-01 (Connect Sanity CMS) blocks most other stories — wire Sanity data before building UI features that need live content.
+User flows are documented in `docs/user-flows/`. Each file (`UF-XX-*.md`) contains the full acceptance criteria and the exact files to touch. Read the relevant flow doc before starting any feature.
 
 ---
 
 ## Testing conventions
 
-- Unit test files live in `src/__tests__/` mirroring `src/` structure (e.g. `hooks/`, `components/`)
+- Unit test files live in `src/__tests__/` mirroring `src/` structure (e.g. `hooks/`, `components/`, `sanity/`)
 - The global setup at `src/__tests__/setup.ts` mocks `next/navigation` and `window.matchMedia`
 - Client Components that use browser APIs (localStorage, matchMedia) must be tested with `jsdom` environment (already the Vitest default)
 - Async Server Components cannot be unit-tested with Vitest — use Playwright E2E for those
 - E2E tests use `page.addInitScript()` to pre-seed localStorage before navigation
-
-# Testing Requirements and Development Workflow
-
-## Testing Requirements
-
-- All public functions/methods must have tests.
-- Integration tests must use a real database (no mocking).
-- Unit test files must be co-located next to their source files (e.g., `user.service.ts` → `user.service.spec.ts`).
-- Run `npm run test` (or `yarn test`) before considering a task done.
-- Always run tests after every code change. Repeat the fix → test loop until no issues remain.
 
 ## Development Workflow (MANDATORY)
 
@@ -140,20 +128,17 @@ Repeat the RED → GREEN → REFACTOR cycle for every small unit of logic.
 
 ### 2. End-to-End Testing (E2E)
 
-After all unit and integration tests pass via TDD, you **MUST** run E2E tests to ensure the entire application flow works as expected:
+After all unit tests pass, run E2E tests to verify the full page/component flow:
 
-- E2E tests must verify the full request lifecycle: API Request (via Supertest) → Middleware/Guards → Controller → Service → Database → HTTP Response.
-- For API endpoints: verify request validation (DTOs), correct status codes, and the final JSON response payload.
-- Run `npm run test:e2e` to verify the full flow. _(Note: NestJS keeps E2E tests in the separate `test/` directory by default)._
-- If an E2E test fails → fix the code → re-run the entire test suite until everything passes.
+- E2E tests live in `tests/e2e/` and use Playwright with Chromium only
+- Run `npm run test:e2e` — this starts the dev server automatically via `webServer` config
+- If an E2E test fails → fix the code → re-run until everything passes
 
 ### 3. Definition of DONE Checklist
 
 - [ ] All TDD cycles are completed (RED → GREEN → REFACTOR).
-- [ ] Unit tests pass (`npm run test`).
-- [ ] Integration tests pass (using a real DB, no mocks).
-- [ ] E2E tests pass for the full flow (`npm run test:e2e`).
-- [ ] Test coverage is 100% passing without any errors.
+- [ ] Unit tests pass (`npm run test:run`).
+- [ ] E2E tests pass (`npm run test:e2e`).
 - [ ] No regressions (all previously written tests still pass).
 
 # Notes:

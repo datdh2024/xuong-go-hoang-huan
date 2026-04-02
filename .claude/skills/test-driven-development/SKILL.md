@@ -30,6 +30,124 @@ Write the test first. Watch it fail. Write minimal code to pass.
 
 Thinking "skip TDD just this once"? Stop. That's rationalization.
 
+---
+
+## E2E Test Detection (Playwright — Next.js)
+
+**E2E tests are NOT optional when triggered. Run them as part of the TDD cycle.**
+
+### When E2E is REQUIRED — check every story before writing unit tests
+
+Evaluate the user story against this list. If **any one** condition matches → E2E is required:
+
+| Signal                                                  | Examples                                                     |
+| ------------------------------------------------------- | ------------------------------------------------------------ |
+| User-visible flow spans multiple pages/routes           | Login → dashboard → action, checkout flow, onboarding wizard |
+| Auth / session boundary                                 | Sign in, sign out, protected routes, role-based access       |
+| Form submit with redirect or toast                      | Submit → success page, error toast, URL change               |
+| Navigation or routing behavior                          | Back button, breadcrumb, deep link, query param              |
+| Third-party integration visible to user                 | OAuth, payment UI, file upload, map embed                    |
+| Real-time / reactive UI                                 | WebSocket updates, optimistic UI, polling                    |
+| User flow exists in `docs/user-flows/` for this feature | Always add E2E to cover the documented flow                  |
+
+**When in doubt:** if a QA tester would click through the browser to verify it — it needs E2E.
+
+### Decision gate — run this before writing any test
+
+```
+Story received
+    │
+    ▼
+Does it match any E2E signal above?
+    │
+   YES ──► Add E2E to test plan. Write Playwright spec alongside unit tests.
+    │
+    NO
+    │
+    ▼
+Does docs/user-flows/ have a flow for this feature?
+    │
+   YES ──► E2E required (cover the documented flow)
+    │
+    NO ──► Unit/integration tests only. Document why E2E not needed.
+```
+
+### E2E TDD cycle (Playwright)
+
+Follow the same Red-Green-Refactor loop — E2E tests are not exempt from TDD.
+
+**RED — write the failing Playwright spec first**
+
+```typescript
+// e2e/auth/login.spec.ts
+import { test, expect } from "@playwright/test";
+
+test("redirects to dashboard after successful login", async ({ page }) => {
+  await page.goto("/login");
+  await page.getByLabel("Email").fill("user@example.com");
+  await page.getByLabel("Password").fill("password123");
+  await page.getByRole("button", { name: "Sign in" }).click();
+
+  await expect(page).toHaveURL("/dashboard");
+  await expect(page.getByRole("heading", { name: "Dashboard" })).toBeVisible();
+});
+```
+
+**Verify RED**
+
+```bash
+npx playwright test e2e/auth/login.spec.ts
+# Must FAIL — feature not implemented yet
+```
+
+**GREEN — implement feature, then verify**
+
+```bash
+npx playwright test e2e/auth/login.spec.ts
+# Must PASS
+npx playwright test  # Full suite — must stay green
+```
+
+**REFACTOR** — clean up selectors, extract helpers, add reusable fixtures.
+
+### File conventions
+
+```
+e2e/
+  [feature]/
+    [flow-name].spec.ts     # mirrors docs/user-flows/ structure
+playwright.config.ts        # baseURL: http://localhost:3000
+```
+
+Run against dev server: ensure `next dev` is running or configure `webServer` in `playwright.config.ts`:
+
+```typescript
+// playwright.config.ts
+export default defineConfig({
+  webServer: {
+    command: "npm run dev",
+    url: "http://localhost:3000",
+    reuseExistingServer: true,
+  },
+  use: { baseURL: "http://localhost:3000" },
+});
+```
+
+### Verification checklist — E2E addition
+
+Before marking a story complete, if E2E was required:
+
+- [ ] E2E decision gate was evaluated explicitly
+- [ ] Playwright spec written **before** feature implementation (TDD)
+- [ ] Watched Playwright spec fail for the right reason
+- [ ] Spec passes after implementation
+- [ ] Full Playwright suite still green
+- [ ] E2E file placed under `e2e/[feature]/` matching user-flow structure
+
+Skipping E2E when it was required = story is NOT complete. No exceptions.
+
+---
+
 ## The Iron Law
 
 ```
@@ -289,6 +407,9 @@ Tests-first force edge case discovery before implementing. Tests-after verify yo
 - Test passes immediately
 - Can't explain why test failed
 - Tests added "later"
+- **E2E decision gate not evaluated**
+- **E2E required by signals above but skipped**
+- **Playwright spec written after implementation**
 - Rationalizing "just this once"
 - "I already manually tested it"
 - "Tests after achieve the same purpose"
@@ -345,11 +466,13 @@ Extract validation for multiple fields if needed.
 
 Before marking work complete:
 
-- [ ] Every new function/method has a test
+- [ ] **E2E decision gate evaluated** — documented why E2E is/isn't required
+- [ ] If E2E required: Playwright spec written before implementation, watched it fail, now passing
+- [ ] Every new function/method has a unit test
 - [ ] Watched each test fail before implementing
 - [ ] Each test failed for expected reason (feature missing, not typo)
 - [ ] Wrote minimal code to pass each test
-- [ ] All tests pass
+- [ ] All tests pass (unit + E2E)
 - [ ] Output pristine (no errors, warnings)
 - [ ] Tests use real code (mocks only if unavoidable)
 - [ ] Edge cases and errors covered
