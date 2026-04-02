@@ -48,7 +48,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="vi" className={`${cormorant.variable} ${beVietnam.variable}`}>
+    <html lang="vi" className={`${cormorant.variable} ${beVietnam.variable}`} suppressHydrationWarning>
       <body className="font-be-vietnam bg-wood-50 text-gray-900 antialiased">
         {children}
       </body>
