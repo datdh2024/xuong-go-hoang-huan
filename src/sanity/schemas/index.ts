@@ -5,6 +5,7 @@ import { projectCategory } from "./projectCategory";
 import { project } from "./project";
 import { houseTemplate } from "./houseTemplate";
 import { aboutPage } from "./aboutPage";
+import { faqItem } from "./faqItem";
 
 export const schemaTypes = [
   siteSettings,
@@ -14,4 +15,5 @@ export const schemaTypes = [
   project,
   houseTemplate,
   aboutPage,
+  faqItem,
 ];

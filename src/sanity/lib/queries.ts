@@ -68,3 +68,9 @@ export const aboutPageQuery = groq`
     heroImage { asset->{url, metadata} }
   }
 `;
+
+export const faqItemsQuery = groq`
+  *[_type == "faqItem"] | order(orderRank) {
+    _id, question, answer
+  }
+`;
