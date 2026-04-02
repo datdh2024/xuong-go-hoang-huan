@@ -27,7 +27,15 @@
       "Bash(gh api:*)",
       "WebFetch(domain:github.com)",
       "WebFetch(domain:raw.githubusercontent.com)",
-      "Bash(npx playwright-cli:*)"
+      "Bash(npx playwright-cli:*)",
+      "mcp__claude_ai_Atlassian__atlassianUserInfo",
+      "mcp__claude_ai_Atlassian__getAccessibleAtlassianResources",
+      "mcp__claude_ai_Atlassian__searchJiraIssuesUsingJql",
+      "Bash(python -c \" import json, sys data = json.load\\(sys.stdin\\) issues = data['issues']['nodes'] print\\(f'Total: {data[\\\\\"issues\\\\\"][\\\\\"totalCount\\\\\"]}'\\) for i in issues: key = i.get\\('key',''\\) summary = i.get\\('summary',''\\) status = i.get\\('fields',{}\\).get\\('status',{}\\).get\\('name',''\\) if i.get\\('fields'\\) else '' itype = i.get\\('fields',{}\\).get\\('issuetype',{}\\).get\\('name',''\\) if i.get\\('fields'\\) else '' project = i.get\\('fields',{}\\).get\\('project',{}\\).get\\('name',''\\) if i.get\\('fields'\\) else '' print\\(f' [{key}] \\({itype}\\) {summary} | Status: {status} | Project: {project}'\\) \")",
+      "Bash(python3 -c \" import json, sys data = json.loads\\(open\\(r'C:\\\\Users\\\\dathr\\\\.claude\\\\projects\\\\E--work-repositories-claude-ai-xuong-go-hoang-huan\\\\6717eca7-bd2a-4404-ba65-7b170d6974bd\\\\tool-results\\\\mcp-claude_ai_Atlassian-searchJiraIssuesUsingJql-1775100438690.txt'\\).read\\(\\)\\) issues = data['issues']['nodes'] print\\(f'Total: {data[\\\\\"issues\\\\\"][\\\\\"totalCount\\\\\"]}'\\) for i in issues: key = i.get\\('key',''\\) summary = i.get\\('summary',''\\) fields = i.get\\('fields'\\) or {} status = \\(fields.get\\('status'\\) or {}\\).get\\('name',''\\) itype = \\(fields.get\\('issuetype'\\) or {}\\).get\\('name',''\\) project = \\(fields.get\\('project'\\) or {}\\).get\\('name',''\\) print\\(f' [{key}] \\({itype}\\) {summary} | {status} | {project}'\\) \")",
+      "Bash(node:*)",
+      "mcp__claude_ai_Atlassian__createJiraIssue",
+      "mcp__claude_ai_Atlassian__getJiraIssue"
     ]
   }
 }
