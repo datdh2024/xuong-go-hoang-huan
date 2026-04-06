@@ -38,7 +38,13 @@
       "mcp__claude_ai_Atlassian__getJiraIssue",
       "mcp__claude_ai_Atlassian__getTransitionsForJiraIssue",
       "mcp__claude_ai_Atlassian__transitionJiraIssue",
-      "mcp__claude_ai_Atlassian__addCommentToJiraIssue"
+      "mcp__claude_ai_Atlassian__addCommentToJiraIssue",
+      "mcp__plugin_atlassian_atlassian__getAccessibleAtlassianResources",
+      "mcp__plugin_atlassian_atlassian__searchJiraIssuesUsingJql",
+      "Bash(playwright-cli help:*)",
+      "Bash(playwright-cli --help)",
+      "Bash(playwright-cli:*)",
+      "Bash(npx @anthropic-ai/playwright-cli open --browser=chrome --profile=../../../chrome-profile --headed https://www.youtube.com)"
     ]
   }
 }

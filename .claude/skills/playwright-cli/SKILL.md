@@ -6,11 +6,20 @@ allowed-tools: Bash(playwright-cli:*)
 
 # Browser Automation with playwright-cli
 
+## Default: Always open in headed mode with persistent Chrome profile
+
+When opening the browser, **always** use `--headed` and `--profile=chrome-profile` and `--browser=chrome` flags:
+
+```bash
+playwright-cli open --browser=chrome --profile=chrome-profile --headed
+playwright-cli open --browser=chrome --profile=chrome-profile --headed https://example.com
+```
+
 ## Quick start
 
 ```bash
-# open new browser
-playwright-cli open
+# open new browser (headed + persistent profile)
+playwright-cli open --browser=chrome --profile=chrome-profile --headed
 # navigate to a page
 playwright-cli goto https://playwright.dev
 # interact with the page using refs from the snapshot

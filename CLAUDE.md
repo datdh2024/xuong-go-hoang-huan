@@ -88,6 +88,7 @@ Both `tailwind.config.ts` and `globals.css @theme inline` define the same tokens
 ```
 NEXT_PUBLIC_SANITY_PROJECT_ID
 NEXT_PUBLIC_SANITY_DATASET
+SANITY_API_TOKEN
 RESEND_API_KEY          # email from contact form
 CONTACT_EMAIL           # recipient for contact form emails
 ZALO_OA_ACCESS_TOKEN    # optional: Zalo OA notifications
