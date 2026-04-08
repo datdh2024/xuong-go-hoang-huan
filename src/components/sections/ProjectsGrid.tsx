@@ -3,8 +3,10 @@ import { ArrowRight } from "lucide-react";
 import SectionHeading from "@/components/ui/SectionHeading";
 import ProjectCard from "@/components/ui/ProjectCard";
 import { FEATURED_PROJECTS } from "@/lib/data";
+import type { SanityProject } from "@/sanity/lib/types";
 
-export default function ProjectsGrid() {
+export default function ProjectsGrid({ projects = FEATURED_PROJECTS }: { projects?: SanityProject[] }) {
+  if (projects.length === 0) return null;
   return (
     <section className="py-20 bg-white dark:bg-wood-800">
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
@@ -14,8 +16,8 @@ export default function ProjectsGrid() {
           description="Hàng trăm công trình nhà gỗ cổ truyền trên khắp cả nước, mỗi công trình là một câu chuyện về tâm huyết và nghề"
         />
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-10">
-          {FEATURED_PROJECTS.map((project) => (
-            <ProjectCard key={project.id} {...project} />
+          {projects.map((project) => (
+            <ProjectCard key={project.slug} {...project} />
           ))}
         </div>
         <div className="text-center">
