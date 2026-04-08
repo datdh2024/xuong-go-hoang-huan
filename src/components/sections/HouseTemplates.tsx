@@ -5,7 +5,7 @@ import { LayoutGrid, Columns2, Columns3 } from "lucide-react";
 
 export default function HouseTemplates() {
   return (
-    <section className="py-20 bg-wood-100">
+    <section className="py-20 bg-wood-100 dark:bg-wood-900">
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         <SectionHeading
           label="Mẫu nhà gỗ"
@@ -14,7 +14,7 @@ export default function HouseTemplates() {
         />
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {HOUSE_TEMPLATES.map((template) => (
-            <div key={template.id} className="bg-white rounded-lg overflow-hidden shadow-sm border border-wood-200 hover:shadow-md transition-shadow group">
+            <div key={template.id} className="bg-white dark:bg-wood-700 rounded-lg overflow-hidden shadow-sm border border-wood-200 dark:border-wood-600 hover:shadow-md transition-shadow group">
               <div className="relative h-44 overflow-hidden">
                 <Image
                   src={template.thumbnail}
@@ -25,25 +25,25 @@ export default function HouseTemplates() {
                 />
               </div>
               <div className="p-4">
-                <h3 className="font-cormorant text-lg font-semibold text-wood-700 mb-2">{template.name}</h3>
+                <h3 className="font-cormorant text-lg font-semibold text-wood-700 dark:text-wood-100 mb-2">{template.name}</h3>
                 <div className="flex flex-wrap gap-2 mb-3">
                   {template.specs.area && (
-                    <span className="flex items-center gap-1 text-xs bg-wood-50 text-wood-600 px-2 py-1 rounded border border-wood-200">
+                    <span className="flex items-center gap-1 text-xs bg-wood-50 dark:bg-wood-600 text-wood-600 dark:text-wood-200 px-2 py-1 rounded border border-wood-200 dark:border-wood-500">
                       <LayoutGrid size={10} /> {template.specs.area}
                     </span>
                   )}
                   {template.specs.bays && (
-                    <span className="flex items-center gap-1 text-xs bg-wood-50 text-wood-600 px-2 py-1 rounded border border-wood-200">
+                    <span className="flex items-center gap-1 text-xs bg-wood-50 dark:bg-wood-600 text-wood-600 dark:text-wood-200 px-2 py-1 rounded border border-wood-200 dark:border-wood-500">
                       <Columns3 size={10} /> {template.specs.bays} gian
                     </span>
                   )}
                   {template.specs.columns && (
-                    <span className="flex items-center gap-1 text-xs bg-wood-50 text-wood-600 px-2 py-1 rounded border border-wood-200">
+                    <span className="flex items-center gap-1 text-xs bg-wood-50 dark:bg-wood-600 text-wood-600 dark:text-wood-200 px-2 py-1 rounded border border-wood-200 dark:border-wood-500">
                       <Columns2 size={10} /> {template.specs.columns} cột
                     </span>
                   )}
                 </div>
-                <p className="text-gray-500 text-xs leading-relaxed">{template.description}</p>
+                <p className="text-gray-500 dark:text-wood-200 text-xs leading-relaxed">{template.description}</p>
               </div>
             </div>
           ))}
