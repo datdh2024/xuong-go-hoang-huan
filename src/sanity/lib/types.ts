@@ -49,6 +49,7 @@ export interface SanityHouseTemplate {
 
 export interface SanityAboutPage {
   heroImage?: string;
+  storyImage?: string;
   story: PortableTextBlock[];
   highlights: Array<{ number: string; label: string }>;
   teamDescription?: string;

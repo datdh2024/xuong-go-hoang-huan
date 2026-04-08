@@ -63,29 +63,31 @@ export default async function ContactPage() {
       {/* Contact info */}
       <section className="py-16">
         <div className="max-w-5xl mx-auto px-4 sm:px-6">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 mb-16">
             {[
               { icon: Phone, label: "Điện thoại", value: siteSettings.phone, href: `tel:${phoneRaw}` },
               { icon: Mail, label: "Email", value: siteSettings.email, href: `mailto:${siteSettings.email}` },
               { icon: MapPin, label: "Địa chỉ", value: siteSettings.address, href: undefined },
               { icon: Clock, label: "Giờ làm việc", value: siteSettings.workingHours, href: undefined },
             ].map(({ icon: Icon, label, value, href }) => (
-              <div key={label} className="bg-wood-50 dark:bg-wood-700 border border-wood-100 dark:border-wood-600 rounded-lg p-5 text-center">
-                <div className="w-10 h-10 bg-wood-600 rounded-lg flex items-center justify-center mx-auto mb-3">
+              <div key={label} className="bg-wood-50 dark:bg-wood-700 border border-wood-100 dark:border-wood-600 rounded-lg p-4 sm:p-5 flex items-center gap-4 sm:block sm:text-center">
+                <div className="w-10 h-10 shrink-0 bg-wood-600 rounded-lg flex items-center justify-center sm:mx-auto sm:mb-3">
                   <Icon size={18} className="text-gold-400" />
                 </div>
-                <p className="text-xs text-gray-400 dark:text-wood-300 uppercase tracking-wider mb-1">{label}</p>
-                {href ? (
-                  <a href={href} className="text-sm font-medium text-wood-700 dark:text-wood-100 hover:text-wood-500 dark:hover:text-gold-400 transition-colors">{value}</a>
-                ) : (
-                  <p className="text-sm font-medium text-wood-700 dark:text-wood-100">{value}</p>
-                )}
+                <div className="min-w-0">
+                  <p className="text-xs text-gray-400 dark:text-wood-300 uppercase tracking-wider mb-1">{label}</p>
+                  {href ? (
+                    <a href={href} className="text-sm font-medium text-wood-700 dark:text-wood-100 hover:text-wood-500 dark:hover:text-gold-400 transition-colors break-all sm:break-normal">{value}</a>
+                  ) : (
+                    <p className="text-sm font-medium text-wood-700 dark:text-wood-100">{value}</p>
+                  )}
+                </div>
               </div>
             ))}
           </div>
 
           {/* Social */}
-          <div className="text-center mb-6">
+          <div className="hidden sm:block text-center mb-6">
             <p className="text-gray-500 dark:text-wood-200 text-sm mb-3">Theo dõi chúng tôi</p>
             <div className="flex justify-center gap-3">
               <a href={siteSettings.facebookUrl} target="_blank" rel="noreferrer"

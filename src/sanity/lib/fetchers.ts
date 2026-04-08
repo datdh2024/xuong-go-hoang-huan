@@ -205,6 +205,12 @@ export async function getAboutPage(): Promise<SanityAboutPage | null> {
           : data.heroImage
             ? imageUrl(data.heroImage)
             : undefined,
+      storyImage:
+        typeof data.storyImage === "string"
+          ? data.storyImage
+          : data.storyImage
+            ? imageUrl(data.storyImage)
+            : undefined,
     };
   } catch {
     return null;

@@ -23,7 +23,7 @@ export const highlightsQuery = groq`
 `;
 
 export const featuredProjectsQuery = groq`
-  *[_type == "project" && featured == true] | order(_createdAt desc) [0..5] {
+  *[_type == "project" && featured == true] | order(order asc, _createdAt desc) [0..5] {
     _id, title, slug, location, completedYear, description,
     category->{ name },
     thumbnail { asset->{url, metadata} }
@@ -31,7 +31,7 @@ export const featuredProjectsQuery = groq`
 `;
 
 export const allProjectsQuery = groq`
-  *[_type == "project"] | order(_createdAt desc) {
+  *[_type == "project"] | order(order asc, _createdAt desc) {
     _id, title, slug, location, completedYear, description,
     category->{ name, slug },
     thumbnail { asset->{url, metadata} }
@@ -65,7 +65,8 @@ export const aboutPageQuery = groq`
   *[_type == "aboutPage"][0] {
     story, teamDescription,
     highlights[] { number, label },
-    heroImage { asset->{url, metadata} }
+    heroImage { asset->{url, metadata} },
+    storyImage { asset->{url, metadata} }
   }
 `;
 

@@ -5,6 +5,7 @@ import { MapPin, CalendarDays, ArrowLeft, Tag } from "lucide-react";
 import { getProjectBySlug, getAllProjects } from "@/sanity/lib/fetchers";
 import { notFound } from "next/navigation";
 import { generateBreadcrumbJsonLd } from "@/lib/seo";
+import ImageGallery from "@/components/ui/ImageGallery";
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -83,13 +84,7 @@ export default async function ProjectDetailPage({ params }: Props) {
 
             {/* Gallery */}
             <h3 className="font-cormorant text-2xl font-semibold text-wood-700 dark:text-wood-100 mb-4">Thư viện ảnh</h3>
-            <div className="grid grid-cols-2 gap-3">
-              {galleryImages.map((img, i) => (
-                <div key={i} className="relative h-48 rounded overflow-hidden">
-                  <Image src={img} alt={`${project.title} - ảnh ${i + 1}`} fill className="object-cover hover:scale-105 transition-transform duration-300" />
-                </div>
-              ))}
-            </div>
+            <ImageGallery images={galleryImages} alt={project.title} />
           </div>
 
           {/* Sidebar */}

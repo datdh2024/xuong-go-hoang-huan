@@ -99,31 +99,43 @@ export default function Header({ siteSettings = SITE_SETTINGS }: { siteSettings?
       </div>
 
       {/* Mobile Nav */}
-      {mobileOpen && (
-        <div className="md:hidden bg-wood-700 border-t border-wood-500">
+      <div
+        className={`md:hidden overflow-hidden transition-all duration-300 ease-out ${
+          mobileOpen ? "max-h-80 opacity-100" : "max-h-0 opacity-0"
+        }`}
+      >
+        <div className="bg-wood-700 border-t border-wood-500">
           <nav className="flex flex-col px-4 py-4 gap-4">
-            {NAV_LINKS.map((link) => (
+            {NAV_LINKS.map((link, i) => (
               <Link
                 key={link.href}
                 href={link.href}
                 onClick={() => setMobileOpen(false)}
-                className={`text-sm font-medium transition-colors hover:text-gold-500 ${
-                  pathname === link.href ? "text-gold-500" : "text-wood-100"
-                }`}
+                className={`text-sm font-medium transition-all duration-300 hover:text-gold-500 ${
+                  mobileOpen
+                    ? "translate-x-0 opacity-100"
+                    : "-translate-x-4 opacity-0"
+                } ${pathname === link.href ? "text-gold-500" : "text-wood-100"}`}
+                style={{ transitionDelay: mobileOpen ? `${i * 60}ms` : "0ms" }}
               >
                 {link.label}
               </Link>
             ))}
             <a
               href={`tel:${(siteSettings.phoneRaw ?? siteSettings.phone.replace(/\s/g, ''))}`}
-              className="flex items-center gap-2 bg-gold-500 text-wood-800 font-semibold text-sm px-4 py-2 rounded w-fit"
+              className={`flex items-center gap-2 bg-gold-500 text-wood-800 font-semibold text-sm px-4 py-2 rounded w-fit transition-all duration-300 ${
+                mobileOpen
+                  ? "translate-x-0 opacity-100"
+                  : "-translate-x-4 opacity-0"
+              }`}
+              style={{ transitionDelay: mobileOpen ? `${NAV_LINKS.length * 60}ms` : "0ms" }}
             >
               <Phone size={16} />
               {siteSettings.phone}
             </a>
           </nav>
         </div>
-      )}
+      </div>
     </header>
   );
 }

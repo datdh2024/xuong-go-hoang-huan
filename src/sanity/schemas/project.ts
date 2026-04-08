@@ -30,6 +30,7 @@ export const project = defineType({
     defineField({ name: "description", title: "Mô tả", type: "text", rows: 4 }),
     defineField({ name: "completedYear", title: "Năm hoàn thành", type: "number" }),
     defineField({ name: "featured", title: "Hiển thị trên trang chủ", type: "boolean", initialValue: false }),
+    defineField({ name: "order", title: "Thứ tự hiển thị", type: "number", initialValue: 0 }),
   ],
   preview: {
     select: { title: "title", subtitle: "location", media: "thumbnail" },

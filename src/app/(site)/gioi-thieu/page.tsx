@@ -33,6 +33,7 @@ export default async function AboutPage() {
   const stats = aboutPage?.highlights ?? STATS;
   const heroImage = aboutPage?.heroImage || "https://images.unsplash.com/photo-1504198322253-cfa87a0ff25f?w=1600&q=80";
   const teamDescription = aboutPage?.teamDescription || "Đội ngũ nghệ nhân của chúng tôi là những người con của làng nghề truyền thống, mang trong mình tình yêu và sự tôn trọng với từng thớ gỗ";
+  const storyImage = aboutPage?.storyImage || "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80";
 
   return (
     <div className="pt-24">
@@ -114,7 +115,7 @@ export default async function AboutPage() {
             </div>
             <div className="relative h-96 rounded-lg overflow-hidden shadow-xl">
               <Image
-                src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80"
+                src={storyImage}
                 alt="Nghệ nhân chạm khắc"
                 fill
                 className="object-cover"

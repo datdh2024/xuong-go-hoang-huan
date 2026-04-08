@@ -12,6 +12,12 @@ export const aboutPage = defineType({
       options: { hotspot: true },
     }),
     defineField({
+      name: "storyImage",
+      title: "Ảnh câu chuyện",
+      type: "image",
+      options: { hotspot: true },
+    }),
+    defineField({
       name: "story",
       title: "Câu chuyện thương hiệu",
       type: "array",
