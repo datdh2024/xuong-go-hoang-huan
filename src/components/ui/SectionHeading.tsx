@@ -15,11 +15,11 @@ export default function SectionHeading({ label, title, description, light }: Sec
         </span>
         <span className="h-px w-12 bg-gold-500" />
       </div>
-      <h2 className={`font-cormorant text-4xl md:text-5xl font-semibold mb-4 ${light ? "text-white" : "text-wood-700"}`}>
+      <h2 className={`font-cormorant text-4xl md:text-5xl font-semibold mb-4 ${light ? "text-white" : "text-wood-700 dark:text-wood-100"}`}>
         {title}
       </h2>
       {description && (
-        <p className={`max-w-2xl mx-auto text-base leading-relaxed ${light ? "text-wood-200" : "text-gray-600"}`}>
+        <p className={`max-w-2xl mx-auto text-base leading-relaxed ${light ? "text-wood-200" : "text-gray-600 dark:text-wood-200"}`}>
           {description}
         </p>
       )}
