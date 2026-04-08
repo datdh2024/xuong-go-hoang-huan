@@ -44,7 +44,14 @@
       "Bash(playwright-cli help:*)",
       "Bash(playwright-cli --help)",
       "Bash(playwright-cli:*)",
-      "Bash(npx @anthropic-ai/playwright-cli open --browser=chrome --profile=../../../chrome-profile --headed https://www.youtube.com)"
+      "Bash(npx @anthropic-ai/playwright-cli open --browser=chrome --profile=../../../chrome-profile --headed https://www.youtube.com)",
+      "Bash(mkdir -p \"C:/Users/dathr/.claude/skills/create-task-workspace/iteration-1/eval-story/with_skill/outputs\")",
+      "Bash(mkdir -p \"C:/Users/dathr/.claude/skills/create-task-workspace/iteration-1/eval-epic/with_skill/outputs\")",
+      "Bash(mkdir -p \"C:/Users/dathr/.claude/skills/create-task-workspace/iteration-1/eval-story/without_skill/outputs\")",
+      "Bash(mkdir -p \"C:/Users/dathr/.claude/skills/create-task-workspace/iteration-1/eval-epic/without_skill/outputs\")",
+      "Bash(cp -r \"C:/Users/dathr/.claude/skills/create-task\" \"E:/work/repositories/claude_ai/xuong-go-hoang-huan/.claude/skills/\")",
+      "Bash(rm -rf \"C:/Users/dathr/.claude/skills/create-task\")",
+      "mcp__claude_ai_Atlassian__getVisibleJiraProjects"
     ]
   }
 }
