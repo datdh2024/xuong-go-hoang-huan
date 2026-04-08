@@ -16,11 +16,11 @@ describe('US-26: Footer social links accessibility', () => {
     expect(facebookLink?.getAttribute('aria-label')).toBeTruthy()
   })
 
-  it('YouTube link has aria-label for screen readers', () => {
+  it('TikTok link has aria-label for screen readers', () => {
     render(<Footer />)
-    const youtubeLink = document.querySelector('a[href*="youtube"]')
-    expect(youtubeLink).not.toBeNull()
-    expect(youtubeLink?.getAttribute('aria-label')).toBeTruthy()
+    const tiktokLink = document.querySelector('a[href*="tiktok"]')
+    expect(tiktokLink).not.toBeNull()
+    expect(tiktokLink?.getAttribute('aria-label')).toBeTruthy()
   })
 
   it('Facebook aria-label mentions the company name', () => {
@@ -30,10 +30,10 @@ describe('US-26: Footer social links accessibility', () => {
     expect(label).toMatch(/facebook/i)
   })
 
-  it('YouTube aria-label mentions the company name', () => {
+  it('TikTok aria-label mentions the company name', () => {
     render(<Footer />)
-    const youtubeLink = document.querySelector('a[href*="youtube"]')
-    const label = youtubeLink?.getAttribute('aria-label') ?? ''
-    expect(label).toMatch(/youtube/i)
+    const tiktokLink = document.querySelector('a[href*="tiktok"]')
+    const label = tiktokLink?.getAttribute('aria-label') ?? ''
+    expect(label).toMatch(/tiktok/i)
   })
 })

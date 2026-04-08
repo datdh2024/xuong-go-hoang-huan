@@ -51,7 +51,21 @@
       "Bash(mkdir -p \"C:/Users/dathr/.claude/skills/create-task-workspace/iteration-1/eval-epic/without_skill/outputs\")",
       "Bash(cp -r \"C:/Users/dathr/.claude/skills/create-task\" \"E:/work/repositories/claude_ai/xuong-go-hoang-huan/.claude/skills/\")",
       "Bash(rm -rf \"C:/Users/dathr/.claude/skills/create-task\")",
-      "mcp__claude_ai_Atlassian__getVisibleJiraProjects"
+      "mcp__claude_ai_Atlassian__getVisibleJiraProjects",
+      "Bash(git -C \"E:/work/repositories/claude_ai/xuong-go-hoang-huan\" status --short)",
+      "mcp__plugin_atlassian_atlassian__getJiraIssue",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:3000)",
+      "Bash(bash:*)",
+      "mcp__context7__resolve-library-id",
+      "mcp__context7__query-docs",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(node_modules/.bin/playwright test:*)",
+      "Bash(npx.cmd playwright:*)",
+      "Bash(ls node_modules/.bin/playwright*)",
+      "Bash(npx --yes playwright test tests/e2e/dark-mode.spec.ts)",
+      "Bash(ls:*)",
+      "Bash(npx tsc:*)"
     ]
   }
 }

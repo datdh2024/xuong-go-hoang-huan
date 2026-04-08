@@ -14,7 +14,7 @@ interface ProjectCardProps {
 
 export default function ProjectCard({ slug, title, location, category, completedYear, description, thumbnail }: ProjectCardProps) {
   return (
-    <Link href={`/cong-trinh/${slug}`} className="group block bg-white rounded-lg overflow-hidden shadow-sm border border-wood-100 hover:shadow-lg transition-all">
+    <Link href={`/cong-trinh/${slug}`} className="group block bg-white dark:bg-wood-700 rounded-lg overflow-hidden shadow-sm border border-wood-100 dark:border-wood-600 hover:shadow-lg transition-all">
       <div className="relative h-56 overflow-hidden">
         <Image
           src={thumbnail}
@@ -29,11 +29,11 @@ export default function ProjectCard({ slug, title, location, category, completed
         </span>
       </div>
       <div className="p-4">
-        <h3 className="font-cormorant text-xl font-semibold text-wood-700 mb-2 group-hover:text-wood-600 transition-colors">
+        <h3 className="font-cormorant text-xl font-semibold text-wood-700 dark:text-wood-100 mb-2 group-hover:text-wood-600 dark:group-hover:text-gold-400 transition-colors">
           {title}
         </h3>
-        <p className="text-gray-500 text-sm leading-relaxed mb-3 line-clamp-2">{description}</p>
-        <div className="flex items-center gap-4 text-xs text-gray-400">
+        <p className="text-gray-500 dark:text-wood-200 text-sm leading-relaxed mb-3 line-clamp-2">{description}</p>
+        <div className="flex items-center gap-4 text-xs text-gray-400 dark:text-wood-300">
           <span className="flex items-center gap-1"><MapPin size={12} />{location}</span>
           <span className="flex items-center gap-1"><CalendarDays size={12} />{completedYear}</span>
         </div>

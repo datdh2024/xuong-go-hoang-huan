@@ -58,12 +58,12 @@ export default function AboutPage() {
                 <span className="h-px w-10 bg-gold-500" />
                 <span className="text-xs text-gold-600 tracking-widest uppercase font-semibold">Câu chuyện</span>
               </div>
-              <h2 className="font-cormorant text-4xl font-semibold text-wood-700 mb-6">
+              <h2 className="font-cormorant text-4xl font-semibold text-wood-700 dark:text-wood-100 mb-6">
                 Tâm Huyết Với Nghề Mộc Truyền Thống
               </h2>
-              <div className="space-y-4 text-gray-600 leading-relaxed">
+              <div className="space-y-4 text-gray-600 dark:text-wood-200 leading-relaxed">
                 <p>
-                  <strong className="text-wood-600">{SITE_SETTINGS.companyName}</strong> được thành lập với niềm đam mê gìn giữ và phát triển nghề mộc truyền thống Việt Nam. Với đội ngũ thợ lành nghề có hơn 40 năm kinh nghiệm, chúng tôi tự hào mang đến những công trình nhà gỗ đẹp, bền và đậm chất văn hóa dân tộc.
+                  <strong className="text-wood-600 dark:text-wood-100">{SITE_SETTINGS.companyName}</strong> được thành lập với niềm đam mê gìn giữ và phát triển nghề mộc truyền thống Việt Nam. Với đội ngũ thợ lành nghề có hơn 40 năm kinh nghiệm, chúng tôi tự hào mang đến những công trình nhà gỗ đẹp, bền và đậm chất văn hóa dân tộc.
                 </p>
                 <p>
                   Mỗi công trình được chúng tôi thực hiện đều xuất phát từ sự tôn trọng với kiến trúc cổ truyền Bắc Bộ, kết hợp với kỹ thuật thi công hiện đại để đảm bảo độ bền và tính thẩm mỹ cao nhất.
@@ -86,7 +86,7 @@ export default function AboutPage() {
       </section>
 
       {/* Team */}
-      <section className="py-20 bg-wood-50">
+      <section className="py-20 bg-wood-50 dark:bg-wood-900">
         <div className="max-w-5xl mx-auto px-4 sm:px-6">
           <SectionHeading
             label="Đội ngũ"
@@ -99,12 +99,12 @@ export default function AboutPage() {
               { role: "Thợ mộc kết cấu", desc: "Đội ngũ xử lý kết cấu cột kèo, đảm bảo độ vững chắc của công trình" },
               { role: "Kiến trúc tư vấn", desc: "Đội tư vấn thiết kế kết hợp kiến trúc truyền thống và nhu cầu hiện đại" },
             ].map((item) => (
-              <div key={item.role} className="bg-white rounded-lg p-6 border border-wood-100 shadow-sm text-center">
+              <div key={item.role} className="bg-white dark:bg-wood-700 rounded-lg p-6 border border-wood-100 dark:border-wood-600 shadow-sm text-center">
                 <div className="w-16 h-16 bg-wood-600 rounded-full mx-auto mb-4 flex items-center justify-center">
                   <span className="text-gold-400 text-2xl font-cormorant font-bold">木</span>
                 </div>
-                <h3 className="font-cormorant text-xl font-semibold text-wood-700 mb-2">{item.role}</h3>
-                <p className="text-gray-500 text-sm">{item.desc}</p>
+                <h3 className="font-cormorant text-xl font-semibold text-wood-700 dark:text-wood-100 mb-2">{item.role}</h3>
+                <p className="text-gray-500 dark:text-wood-200 text-sm">{item.desc}</p>
               </div>
             ))}
           </div>

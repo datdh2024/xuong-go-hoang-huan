@@ -22,7 +22,7 @@ export default function FaqSection({ faqs }: Props) {
   };
 
   return (
-    <section className="py-20 bg-white">
+    <section className="py-20 bg-white dark:bg-wood-800">
       <div className="max-w-3xl mx-auto px-4 sm:px-6">
         <SectionHeading
           label="Giải đáp thắc mắc"
@@ -36,15 +36,15 @@ export default function FaqSection({ faqs }: Props) {
             return (
               <div
                 key={faq._id}
-                className="border border-wood-200 rounded-lg overflow-hidden"
+                className="border border-wood-200 dark:border-wood-600 rounded-lg overflow-hidden"
               >
                 <button
                   aria-expanded={isOpen}
                   aria-controls={`faq-answer-${faq._id}`}
                   onClick={() => toggle(faq._id)}
-                  className="w-full flex items-center justify-between gap-4 px-5 py-4 text-left bg-wood-50 hover:bg-wood-100 transition-colors"
+                  className="w-full flex items-center justify-between gap-4 px-5 py-4 text-left bg-wood-50 dark:bg-wood-700 hover:bg-wood-100 dark:hover:bg-wood-600 transition-colors"
                 >
-                  <span className="text-wood-700 font-semibold text-sm">
+                  <span className="text-wood-700 dark:text-wood-100 font-semibold text-sm">
                     {faq.question}
                   </span>
                   <ChevronDown
@@ -58,7 +58,7 @@ export default function FaqSection({ faqs }: Props) {
                   role="region"
                   aria-labelledby={`faq-btn-${faq._id}`}
                   hidden={!isOpen}
-                  className="px-5 py-4 text-gray-600 text-sm leading-relaxed bg-white border-t border-wood-100"
+                  className="px-5 py-4 text-gray-600 dark:text-wood-200 text-sm leading-relaxed bg-white dark:bg-wood-800 border-t border-wood-100 dark:border-wood-600"
                 >
                   {faq.answer}
                 </div>

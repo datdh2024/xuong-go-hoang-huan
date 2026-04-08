@@ -1,5 +1,7 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 @theme inline {
   --font-cormorant: var(--font-cormorant);
   --font-be-vietnam: var(--font-be-vietnam);
@@ -30,8 +32,6 @@ html {
 
 body {
   font-family: var(--font-be-vietnam), sans-serif;
-  background-color: #faf7f2;
-  color: #1a1a1a;
 }
 
 .font-cormorant {

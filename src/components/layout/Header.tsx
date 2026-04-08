@@ -5,6 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Phone, Menu, X } from "lucide-react";
 import { SITE_SETTINGS } from "@/lib/data";
+import ThemeToggle from "@/components/ui/ThemeToggle";
 
 export interface SiteSettingsData {
   companyName: string;
@@ -17,7 +18,7 @@ export interface SiteSettingsData {
   address: string;
   workingHours: string;
   facebookUrl: string;
-  youtubeUrl: string;
+  tiktokUrl: string;
 }
 
 const NAV_LINKS = [
@@ -72,23 +73,29 @@ export default function Header({ siteSettings = SITE_SETTINGS }: { siteSettings?
           ))}
         </nav>
 
-        {/* Phone CTA */}
-        <a
-          href={`tel:${(siteSettings.phoneRaw ?? siteSettings.phone.replace(/\s/g, ''))}`}
-          className="hidden md:flex items-center gap-2 bg-gold-500 hover:bg-gold-600 text-wood-800 font-semibold text-sm px-4 py-2 rounded transition-colors"
-        >
-          <Phone size={16} />
-          {siteSettings.phone}
-        </a>
+        {/* Desktop: toggle + phone */}
+        <div className="hidden md:flex items-center gap-2">
+          <ThemeToggle />
+          <a
+            href={`tel:${(siteSettings.phoneRaw ?? siteSettings.phone.replace(/\s/g, ''))}`}
+            className="flex items-center gap-2 bg-gold-500 hover:bg-gold-600 text-wood-800 font-semibold text-sm px-4 py-2 rounded transition-colors"
+          >
+            <Phone size={16} />
+            {siteSettings.phone}
+          </a>
+        </div>
 
-        {/* Mobile menu button */}
-        <button
-          className="md:hidden text-wood-100 p-1"
-          onClick={() => setMobileOpen(!mobileOpen)}
-          aria-label="Toggle menu"
-        >
-          {mobileOpen ? <X size={24} /> : <Menu size={24} />}
-        </button>
+        {/* Mobile: toggle + hamburger */}
+        <div className="flex md:hidden items-center gap-1">
+          <ThemeToggle />
+          <button
+            className="text-wood-100 p-1"
+            onClick={() => setMobileOpen(!mobileOpen)}
+            aria-label="Toggle menu"
+          >
+            {mobileOpen ? <X size={24} /> : <Menu size={24} />}
+          </button>
+        </div>
       </div>
 
       {/* Mobile Nav */}

@@ -17,7 +17,7 @@ const customSettings = {
   address: 'Test Address, Test City',
   workingHours: '8:00 - 17:00',
   facebookUrl: 'https://facebook.com/test',
-  youtubeUrl: 'https://youtube.com/test',
+  tiktokUrl: 'https://www.tiktok.com/@test',
 }
 
 describe('US-28: Header renders from siteSettings prop', () => {
