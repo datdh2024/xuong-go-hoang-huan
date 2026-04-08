@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import SectionHeading from "@/components/ui/SectionHeading";
-import { SITE_SETTINGS } from "@/lib/data";
+import { getAboutPage } from "@/sanity/lib/fetchers";
 
 export const metadata: Metadata = {
   title: "Giới thiệu",
@@ -15,13 +15,19 @@ const STATS = [
   { number: "1.000m²", label: "Diện tích xưởng" },
 ];
 
-export default function AboutPage() {
+export default async function AboutPage() {
+  const aboutPage = await getAboutPage();
+
+  const stats = aboutPage?.highlights ?? STATS;
+  const heroImage = aboutPage?.heroImage || "https://images.unsplash.com/photo-1504198322253-cfa87a0ff25f?w=1600&q=80";
+  const teamDescription = aboutPage?.teamDescription || "Đội ngũ nghệ nhân của chúng tôi là những người con của làng nghề truyền thống, mang trong mình tình yêu và sự tôn trọng với từng thớ gỗ";
+
   return (
     <div className="pt-24">
       {/* Hero */}
       <div className="relative h-72 md:h-96">
         <Image
-          src="https://images.unsplash.com/photo-1504198322253-cfa87a0ff25f?w=1600&q=80"
+          src={heroImage}
           alt="Xưởng Gỗ Hoàng Huân - nhà gỗ cổ truyền"
           fill
           className="object-cover"
@@ -40,7 +46,7 @@ export default function AboutPage() {
       {/* Stats */}
       <div className="bg-wood-600 py-10">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
-          {STATS.map((s) => (
+          {stats.map((s) => (
             <div key={s.label}>
               <div className="font-cormorant text-4xl font-bold text-gold-400">{s.number}</div>
               <div className="text-wood-200 text-sm mt-1">{s.label}</div>
@@ -62,15 +68,25 @@ export default function AboutPage() {
                 Tâm Huyết Với Nghề Mộc Truyền Thống
               </h2>
               <div className="space-y-4 text-gray-600 dark:text-wood-200 leading-relaxed">
-                <p>
-                  <strong className="text-wood-600 dark:text-wood-100">{SITE_SETTINGS.companyName}</strong> được thành lập với niềm đam mê gìn giữ và phát triển nghề mộc truyền thống Việt Nam. Với đội ngũ thợ lành nghề có hơn 40 năm kinh nghiệm, chúng tôi tự hào mang đến những công trình nhà gỗ đẹp, bền và đậm chất văn hóa dân tộc.
-                </p>
-                <p>
-                  Mỗi công trình được chúng tôi thực hiện đều xuất phát từ sự tôn trọng với kiến trúc cổ truyền Bắc Bộ, kết hợp với kỹ thuật thi công hiện đại để đảm bảo độ bền và tính thẩm mỹ cao nhất.
-                </p>
-                <p>
-                  Từ những ngôi nhà gỗ 3 gian, 5 gian truyền thống đến nhà thờ họ, đình chùa, đồ thờ gỗ — mỗi sản phẩm đều là tâm huyết của cả đội ngũ nghệ nhân.
-                </p>
+                {aboutPage?.story?.length ? (
+                  aboutPage.story.map((block: Record<string, unknown>, i: number) => (
+                    <p key={i}>
+                      {(block.children as Array<{ text: string }>)?.map((c) => c.text).join("") ?? ""}
+                    </p>
+                  ))
+                ) : (
+                  <>
+                    <p>
+                      <strong className="text-wood-600 dark:text-wood-100">Xưởng Gỗ Hoàng Huân</strong> được thành lập với niềm đam mê gìn giữ và phát triển nghề mộc truyền thống Việt Nam. Với đội ngũ thợ lành nghề có hơn 40 năm kinh nghiệm, chúng tôi tự hào mang đến những công trình nhà gỗ đẹp, bền và đậm chất văn hóa dân tộc.
+                    </p>
+                    <p>
+                      Mỗi công trình được chúng tôi thực hiện đều xuất phát từ sự tôn trọng với kiến trúc cổ truyền Bắc Bộ, kết hợp với kỹ thuật thi công hiện đại để đảm bảo độ bền và tính thẩm mỹ cao nhất.
+                    </p>
+                    <p>
+                      Từ những ngôi nhà gỗ 3 gian, 5 gian truyền thống đến nhà thờ họ, đình chùa, đồ thờ gỗ — mỗi sản phẩm đều là tâm huyết của cả đội ngũ nghệ nhân.
+                    </p>
+                  </>
+                )}
               </div>
             </div>
             <div className="relative h-96 rounded-lg overflow-hidden shadow-xl">
@@ -91,7 +107,7 @@ export default function AboutPage() {
           <SectionHeading
             label="Đội ngũ"
             title="Những Người Thợ Tâm Huyết"
-            description="Đội ngũ nghệ nhân của chúng tôi là những người con của làng nghề truyền thống, mang trong mình tình yêu và sự tôn trọng với từng thớ gỗ"
+            description={teamDescription}
           />
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {[

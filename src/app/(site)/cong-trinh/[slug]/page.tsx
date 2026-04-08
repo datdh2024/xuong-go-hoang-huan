@@ -2,14 +2,14 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { MapPin, CalendarDays, ArrowLeft, Tag } from "lucide-react";
-import { FEATURED_PROJECTS } from "@/lib/data";
+import { getProjectBySlug, getAllProjects } from "@/sanity/lib/fetchers";
 import { notFound } from "next/navigation";
 
 type Props = { params: Promise<{ slug: string }> };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
-  const project = FEATURED_PROJECTS.find((p) => p.slug === slug);
+  const project = await getProjectBySlug(slug);
   if (!project) return {};
   return {
     title: project.title,
@@ -17,21 +17,17 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
-export function generateStaticParams() {
-  return FEATURED_PROJECTS.map((p) => ({ slug: p.slug }));
+export async function generateStaticParams() {
+  const projects = await getAllProjects();
+  return projects.map((p) => ({ slug: p.slug }));
 }
-
-const DETAIL_IMAGES = [
-  "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&q=80",
-  "https://images.unsplash.com/photo-1568605114967-8130f3a36994?w=800&q=80",
-  "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80",
-  "https://images.unsplash.com/photo-1583847268964-b28dc8f51f92?w=800&q=80",
-];
 
 export default async function ProjectDetailPage({ params }: Props) {
   const { slug } = await params;
-  const project = FEATURED_PROJECTS.find((p) => p.slug === slug);
+  const project = await getProjectBySlug(slug);
   if (!project) notFound();
+
+  const galleryImages = project.images?.length ? project.images : [project.thumbnail];
 
   return (
     <div className="pt-24">
@@ -64,7 +60,7 @@ export default async function ProjectDetailPage({ params }: Props) {
             {/* Gallery */}
             <h3 className="font-cormorant text-2xl font-semibold text-wood-700 mb-4">Thư viện ảnh</h3>
             <div className="grid grid-cols-2 gap-3">
-              {DETAIL_IMAGES.map((img, i) => (
+              {galleryImages.map((img, i) => (
                 <div key={i} className="relative h-48 rounded overflow-hidden">
                   <Image src={img} alt={`${project.title} - ảnh ${i + 1}`} fill className="object-cover hover:scale-105 transition-transform duration-300" />
                 </div>
