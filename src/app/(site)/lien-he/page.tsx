@@ -39,15 +39,15 @@ export default function ContactPage() {
               { icon: MapPin, label: "Địa chỉ", value: SITE_SETTINGS.address, href: undefined },
               { icon: Clock, label: "Giờ làm việc", value: SITE_SETTINGS.workingHours, href: undefined },
             ].map(({ icon: Icon, label, value, href }) => (
-              <div key={label} className="bg-wood-50 border border-wood-100 rounded-lg p-5 text-center">
+              <div key={label} className="bg-wood-50 dark:bg-wood-700 border border-wood-100 dark:border-wood-600 rounded-lg p-5 text-center">
                 <div className="w-10 h-10 bg-wood-600 rounded-lg flex items-center justify-center mx-auto mb-3">
                   <Icon size={18} className="text-gold-400" />
                 </div>
-                <p className="text-xs text-gray-400 uppercase tracking-wider mb-1">{label}</p>
+                <p className="text-xs text-gray-400 dark:text-wood-300 uppercase tracking-wider mb-1">{label}</p>
                 {href ? (
-                  <a href={href} className="text-sm font-medium text-wood-700 hover:text-wood-500 transition-colors">{value}</a>
+                  <a href={href} className="text-sm font-medium text-wood-700 dark:text-wood-100 hover:text-wood-500 dark:hover:text-gold-400 transition-colors">{value}</a>
                 ) : (
-                  <p className="text-sm font-medium text-wood-700">{value}</p>
+                  <p className="text-sm font-medium text-wood-700 dark:text-wood-100">{value}</p>
                 )}
               </div>
             ))}
@@ -55,14 +55,14 @@ export default function ContactPage() {
 
           {/* Social */}
           <div className="text-center mb-6">
-            <p className="text-gray-500 text-sm mb-3">Theo dõi chúng tôi</p>
+            <p className="text-gray-500 dark:text-wood-200 text-sm mb-3">Theo dõi chúng tôi</p>
             <div className="flex justify-center gap-3">
               <a href={SITE_SETTINGS.facebookUrl} target="_blank" rel="noreferrer"
-                className="flex items-center gap-2 px-4 py-2 border border-wood-200 rounded hover:bg-wood-600 hover:text-white hover:border-wood-600 transition-colors text-sm text-wood-600">
+                className="flex items-center gap-2 px-4 py-2 border border-wood-200 dark:border-wood-500 rounded hover:bg-wood-600 hover:text-white hover:border-wood-600 transition-colors text-sm text-wood-600 dark:text-wood-200">
                 <Facebook size={16} /> Facebook
               </a>
               <a href={SITE_SETTINGS.youtubeUrl} target="_blank" rel="noreferrer"
-                className="flex items-center gap-2 px-4 py-2 border border-wood-200 rounded hover:bg-wood-600 hover:text-white hover:border-wood-600 transition-colors text-sm text-wood-600">
+                className="flex items-center gap-2 px-4 py-2 border border-wood-200 dark:border-wood-500 rounded hover:bg-wood-600 hover:text-white hover:border-wood-600 transition-colors text-sm text-wood-600 dark:text-wood-200">
                 <Youtube size={16} /> YouTube
               </a>
             </div>
