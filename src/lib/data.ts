@@ -1,3 +1,5 @@
+export const SITE_URL = "https://xuong-go-hoang-huan.vercel.app";
+
 // Placeholder data - thay bằng Sanity queries khi có project ID
 
 export const SITE_SETTINGS = {
