@@ -1,6 +1,7 @@
 import { render, screen } from '@testing-library/react'
 import { describe, it, expect, vi } from 'vitest'
 import HeroSlider from '@/components/sections/HeroSlider'
+import type { SanityHeroSlide } from '@/sanity/lib/types'
 
 vi.mock('next/image', () => ({
   default: ({ src, alt, ...props }: { src: string; alt: string; [key: string]: unknown }) => (
@@ -63,5 +64,46 @@ describe('US-27: HeroSlider mobile responsiveness', () => {
     dotBtns.forEach(btn => {
       expect(btn.className).toMatch(/min-w-\[44px\]|min-h-\[44px\]/)
     })
+  })
+})
+
+describe('US-01: HeroSlider accepts slides prop', () => {
+  const testSlides: SanityHeroSlide[] = [
+    {
+      image: 'https://example.com/slide1.jpg',
+      headline: 'CMS Headline',
+      subheadline: 'CMS Sub',
+      ctaLabel: 'CMS CTA',
+      ctaLink: '/cms-link',
+      order: 1,
+    },
+  ]
+
+  it('renders headline from props', () => {
+    render(<HeroSlider slides={testSlides} />)
+    expect(screen.getByText('CMS Headline')).toBeTruthy()
+  })
+
+  it('renders subheadline from props', () => {
+    render(<HeroSlider slides={testSlides} />)
+    expect(screen.getByText('CMS Sub')).toBeTruthy()
+  })
+
+  it('renders CTA label from props', () => {
+    render(<HeroSlider slides={testSlides} />)
+    expect(screen.getByText('CMS CTA')).toBeTruthy()
+  })
+
+  it('renders CTA link from props', () => {
+    render(<HeroSlider slides={testSlides} />)
+    const link = screen.getByText('CMS CTA').closest('a')
+    expect(link?.getAttribute('href')).toBe('/cms-link')
+  })
+
+  it('hides navigation dots when only one slide', () => {
+    render(<HeroSlider slides={testSlides} />)
+    const buttons = screen.queryAllByRole('button')
+    const dotBtns = buttons.filter(b => b.getAttribute('aria-label')?.match(/slide/i))
+    expect(dotBtns.length).toBe(0)
   })
 })
