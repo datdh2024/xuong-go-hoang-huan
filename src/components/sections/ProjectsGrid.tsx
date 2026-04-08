@@ -2,9 +2,25 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import SectionHeading from "@/components/ui/SectionHeading";
 import ProjectCard from "@/components/ui/ProjectCard";
-import { FEATURED_PROJECTS } from "@/lib/data";
 
-export default function ProjectsGrid() {
+export interface SanityProject {
+  _id: string;
+  title: string;
+  slug: { current: string };
+  location: string;
+  completedYear: number;
+  description: string;
+  category: { name: string } | null;
+  thumbnail: { asset: { url: string } } | null;
+}
+
+interface Props {
+  projects: SanityProject[] | null;
+}
+
+export default function ProjectsGrid({ projects }: Props) {
+  const items = projects ?? [];
+
   return (
     <section className="py-20 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
@@ -14,8 +30,17 @@ export default function ProjectsGrid() {
           description="Hàng trăm công trình nhà gỗ cổ truyền trên khắp cả nước, mỗi công trình là một câu chuyện về tâm huyết và nghề"
         />
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-10">
-          {FEATURED_PROJECTS.map((project) => (
-            <ProjectCard key={project.id} {...project} />
+          {items.map((project) => (
+            <ProjectCard
+              key={project._id}
+              slug={project.slug.current}
+              title={project.title}
+              location={project.location}
+              category={project.category?.name ?? ""}
+              completedYear={project.completedYear}
+              description={project.description}
+              thumbnail={project.thumbnail?.asset?.url ?? ""}
+            />
           ))}
         </div>
         <div className="text-center">

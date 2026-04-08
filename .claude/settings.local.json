@@ -51,7 +51,18 @@
       "Bash(mkdir -p \"C:/Users/dathr/.claude/skills/create-task-workspace/iteration-1/eval-epic/without_skill/outputs\")",
       "Bash(cp -r \"C:/Users/dathr/.claude/skills/create-task\" \"E:/work/repositories/claude_ai/xuong-go-hoang-huan/.claude/skills/\")",
       "Bash(rm -rf \"C:/Users/dathr/.claude/skills/create-task\")",
-      "mcp__claude_ai_Atlassian__getVisibleJiraProjects"
+      "mcp__claude_ai_Atlassian__getVisibleJiraProjects",
+      "mcp__plugin_atlassian_atlassian__getJiraIssue",
+      "mcp__plugin_atlassian_atlassian__getJiraProjectIssueTypesMetadata",
+      "mcp__plugin_atlassian_atlassian__getJiraIssueTypeMetaWithFields",
+      "mcp__plugin_atlassian_atlassian__getIssueLinkTypes",
+      "mcp__plugin_atlassian_atlassian__createJiraIssue",
+      "mcp__plugin_atlassian_atlassian__createIssueLink",
+      "mcp__plugin_atlassian_atlassian__fetchAtlassian",
+      "mcp__plugin_atlassian_atlassian__editJiraIssue",
+      "mcp__plugin_atlassian_atlassian__addCommentToJiraIssue",
+      "Bash(curl:*)",
+      "Bash(npx tsc:*)"
     ]
   }
 }
