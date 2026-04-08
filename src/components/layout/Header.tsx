@@ -18,7 +18,7 @@ export interface SiteSettingsData {
   address: string;
   workingHours: string;
   facebookUrl: string;
-  youtubeUrl: string;
+  tiktokUrl: string;
 }
 
 const NAV_LINKS = [

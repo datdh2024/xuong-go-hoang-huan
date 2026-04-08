@@ -1,4 +1,5 @@
 import { render, screen, fireEvent } from "@testing-library/react";
+import { describe, it, expect, beforeEach, vi } from "vitest";
 import ThemeToggle from "@/components/ui/ThemeToggle";
 
 const mockSetTheme = vi.fn();
@@ -20,7 +21,9 @@ describe("ThemeToggle", () => {
 
   it("renders a button with accessible label", () => {
     render(<ThemeToggle />);
-    expect(screen.getByRole("button", { name: /switch to dark mode/i })).toBeInTheDocument();
+    expect(
+      screen.getByRole("button", { name: /switch to dark mode/i }),
+    ).toBeInTheDocument();
   });
 
   it("switches to dark mode when clicked in light mode", () => {

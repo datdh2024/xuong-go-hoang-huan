@@ -2,9 +2,9 @@ import { groq } from "next-sanity";
 
 export const siteSettingsQuery = groq`
   *[_type == "siteSettings"][0] {
-    companyName, tagline, phone, zaloNumber,
+    companyName, tagline, taglineSub, phone, zaloNumber,
     email, address, workingHours,
-    facebookUrl, youtubeUrl
+    facebookUrl, "tiktokUrl": tiktokUrl
   }
 `;
 

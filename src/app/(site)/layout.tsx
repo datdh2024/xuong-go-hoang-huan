@@ -13,13 +13,17 @@ async function getSiteSettings() {
     const { client } = await import("@/sanity/lib/client");
     const { siteSettingsQuery } = await import("@/sanity/lib/queries");
     const data = await client.fetch(siteSettingsQuery);
-    return data ?? SITE_SETTINGS;
+    return data ? data : SITE_SETTINGS;
   } catch {
     return SITE_SETTINGS;
   }
 }
 
-export default async function SiteLayout({ children }: { children: React.ReactNode }) {
+export default async function SiteLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   const siteSettings = await getSiteSettings();
 
   return (

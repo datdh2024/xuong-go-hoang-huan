@@ -64,7 +64,8 @@
       "Bash(npx.cmd playwright:*)",
       "Bash(ls node_modules/.bin/playwright*)",
       "Bash(npx --yes playwright test tests/e2e/dark-mode.spec.ts)",
-      "Bash(ls:*)"
+      "Bash(ls:*)",
+      "Bash(npx tsc:*)"
     ]
   }
 }

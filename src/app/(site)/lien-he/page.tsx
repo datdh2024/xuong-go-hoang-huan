@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
-import { Phone, Mail, MapPin, Clock, Facebook, Youtube } from "lucide-react";
+import { Phone, Mail, MapPin, Clock, Facebook } from "lucide-react";
 import QuoteForm from "@/components/sections/QuoteForm";
 import { SITE_SETTINGS } from "@/lib/data";
 
@@ -61,9 +61,9 @@ export default function ContactPage() {
                 className="flex items-center gap-2 px-4 py-2 border border-wood-200 dark:border-wood-500 rounded hover:bg-wood-600 hover:text-white hover:border-wood-600 transition-colors text-sm text-wood-600 dark:text-wood-200">
                 <Facebook size={16} /> Facebook
               </a>
-              <a href={SITE_SETTINGS.youtubeUrl} target="_blank" rel="noreferrer"
+              <a href={SITE_SETTINGS.tiktokUrl} target="_blank" rel="noreferrer"
                 className="flex items-center gap-2 px-4 py-2 border border-wood-200 dark:border-wood-500 rounded hover:bg-wood-600 hover:text-white hover:border-wood-600 transition-colors text-sm text-wood-600 dark:text-wood-200">
-                <Youtube size={16} /> YouTube
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.3 0 .59.04.86.11V9.01a6.27 6.27 0 0 0-.86-.06 6.28 6.28 0 0 0-6.28 6.28 6.28 6.28 0 0 0 6.28 6.28 6.28 6.28 0 0 0 6.28-6.28V8.69a8.16 8.16 0 0 0 4.78 1.53V6.77a4.85 4.85 0 0 1-.96-.08z"/></svg> TikTok
               </a>
             </div>
           </div>

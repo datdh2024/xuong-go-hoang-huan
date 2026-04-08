@@ -10,8 +10,8 @@ export const SITE_SETTINGS = {
   email: "datdh2024@gmail.com",
   address: "Thôn Yên Quán, xã Hưng Đạo, Hà Nội",
   workingHours: "7:00 - 18:00 (Thứ 2 - Chủ nhật)",
-  facebookUrl: "https://facebook.com",
-  youtubeUrl: "https://youtube.com",
+  facebookUrl: "https://www.facebook.com/profile.php?id=61579605190676",
+  tiktokUrl: "https://www.tiktok.com/@hoang.minhquang",
 };
 
 export const HERO_SLIDES = [
