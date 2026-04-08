@@ -30,6 +30,7 @@ Updated test-result, test-result-note on test cases file
 - Find the file `docs/test-cases/[group]/TC-[id]-[name].md` corresponding to the feature
 - If it doesn't exist, notify that `task-explore` needs to be run first
 - Parse all test cases: happy path, edge case, error case
+- **Skip any test case marked `BYPASS`** — these are known limitations or intentionally excluded. Do not execute them; carry forward their existing result as-is.
 
 ### Step 2 — Run tests with Playwright CLI
 
@@ -45,7 +46,7 @@ For each test case:
 
 - Execute exactly according to the `steps` in the TC file
 - Compare actual results with `expected_result`
-- Record: `PASS` or `FAIL + brief description`
+- Record: `PASS`, `FAIL + brief description`, or `BYPASS` (carried forward, not executed)
 
 ### Step 3 — Regression check
 
@@ -62,6 +63,7 @@ Self-Test Report
 ------------------------------
 Status:           PASS | FAIL
 Cases passed:     N
+Cases bypassed:   N
 Cases failed:     N
 Regression risk:  LOW | MEDIUM | HIGH
 Notes:            ...

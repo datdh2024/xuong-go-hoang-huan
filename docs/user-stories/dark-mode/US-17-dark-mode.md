@@ -21,6 +21,7 @@ Provide a dark color scheme that activates automatically based on the user's sys
 - localStorage key: `theme` — persists user preference across sessions
 - Footer already dark-styled — minimal changes needed, remains visually consistent
 - **Known limitation:** next-themes does not validate stored theme values (TC-17-13)
+- **Bug fix (2026-04-08):** Removed hardcoded `background-color` and `color` from the `body` rule in `globals.css` — these had higher specificity than Tailwind's `dark:bg-wood-800` / `dark:text-wood-100` utility classes, causing near-invisible text in dark mode across all pages
 
 ## Acceptance Criteria
 
@@ -58,4 +59,4 @@ Provide a dark color scheme that activates automatically based on the user's sys
 
 ---
 
-*Last synced: 2026-04-08*
+*Last synced: 2026-04-08 (updated for globals.css dark mode fix)*
