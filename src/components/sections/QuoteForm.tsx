@@ -19,7 +19,7 @@ const schema = z.object({
 
 type FormData = z.infer<typeof schema>;
 
-export default function QuoteForm() {
+export default function QuoteForm({ houseTypes = HOUSE_TYPES }: { houseTypes?: string[] }) {
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
 
@@ -94,7 +94,7 @@ export default function QuoteForm() {
                   className="w-full bg-white/20 border border-white/30 text-white rounded px-3 py-2.5 text-sm focus:outline-none focus:border-gold-400"
                 >
                   <option value="" className="text-gray-800">-- Chọn loại nhà --</option>
-                  {HOUSE_TYPES.map((t) => <option key={t} value={t} className="text-gray-800">{t}</option>)}
+                  {houseTypes.map((t) => <option key={t} value={t} className="text-gray-800">{t}</option>)}
                 </select>
                 {errors.houseType && <p className="text-red-300 text-xs mt-1">{errors.houseType.message}</p>}
               </div>

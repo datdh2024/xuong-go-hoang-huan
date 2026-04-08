@@ -2,14 +2,22 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import { Phone, Mail, MapPin, Clock, Facebook } from "lucide-react";
 import QuoteForm from "@/components/sections/QuoteForm";
-import { SITE_SETTINGS } from "@/lib/data";
+import { getSiteSettings, getFeaturedTemplates } from "@/sanity/lib/fetchers";
 
 export const metadata: Metadata = {
   title: "Liên hệ",
   description: "Liên hệ với Xưởng Gỗ Hoàng Huân để được tư vấn và báo giá thi công nhà gỗ cổ truyền miễn phí.",
 };
 
-export default function ContactPage() {
+export default async function ContactPage() {
+  const [siteSettings, templates] = await Promise.all([
+    getSiteSettings(),
+    getFeaturedTemplates(),
+  ]);
+
+  const houseTypes = templates.map((t) => t.name);
+  const phoneRaw = siteSettings.phoneRaw ?? siteSettings.phone.replace(/\s/g, "");
+
   return (
     <div className="pt-24">
       {/* Hero */}
@@ -34,10 +42,10 @@ export default function ContactPage() {
         <div className="max-w-5xl mx-auto px-4 sm:px-6">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
             {[
-              { icon: Phone, label: "Điện thoại", value: SITE_SETTINGS.phone, href: `tel:${SITE_SETTINGS.phoneRaw}` },
-              { icon: Mail, label: "Email", value: SITE_SETTINGS.email, href: `mailto:${SITE_SETTINGS.email}` },
-              { icon: MapPin, label: "Địa chỉ", value: SITE_SETTINGS.address, href: undefined },
-              { icon: Clock, label: "Giờ làm việc", value: SITE_SETTINGS.workingHours, href: undefined },
+              { icon: Phone, label: "Điện thoại", value: siteSettings.phone, href: `tel:${phoneRaw}` },
+              { icon: Mail, label: "Email", value: siteSettings.email, href: `mailto:${siteSettings.email}` },
+              { icon: MapPin, label: "Địa chỉ", value: siteSettings.address, href: undefined },
+              { icon: Clock, label: "Giờ làm việc", value: siteSettings.workingHours, href: undefined },
             ].map(({ icon: Icon, label, value, href }) => (
               <div key={label} className="bg-wood-50 dark:bg-wood-700 border border-wood-100 dark:border-wood-600 rounded-lg p-5 text-center">
                 <div className="w-10 h-10 bg-wood-600 rounded-lg flex items-center justify-center mx-auto mb-3">
@@ -57,11 +65,11 @@ export default function ContactPage() {
           <div className="text-center mb-6">
             <p className="text-gray-500 dark:text-wood-200 text-sm mb-3">Theo dõi chúng tôi</p>
             <div className="flex justify-center gap-3">
-              <a href={SITE_SETTINGS.facebookUrl} target="_blank" rel="noreferrer"
+              <a href={siteSettings.facebookUrl} target="_blank" rel="noreferrer"
                 className="flex items-center gap-2 px-4 py-2 border border-wood-200 dark:border-wood-500 rounded hover:bg-wood-600 hover:text-white hover:border-wood-600 transition-colors text-sm text-wood-600 dark:text-wood-200">
                 <Facebook size={16} /> Facebook
               </a>
-              <a href={SITE_SETTINGS.tiktokUrl} target="_blank" rel="noreferrer"
+              <a href={siteSettings.tiktokUrl} target="_blank" rel="noreferrer"
                 className="flex items-center gap-2 px-4 py-2 border border-wood-200 dark:border-wood-500 rounded hover:bg-wood-600 hover:text-white hover:border-wood-600 transition-colors text-sm text-wood-600 dark:text-wood-200">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.3 0 .59.04.86.11V9.01a6.27 6.27 0 0 0-.86-.06 6.28 6.28 0 0 0-6.28 6.28 6.28 6.28 0 0 0 6.28 6.28 6.28 6.28 0 0 0 6.28-6.28V8.69a8.16 8.16 0 0 0 4.78 1.53V6.77a4.85 4.85 0 0 1-.96-.08z"/></svg> TikTok
               </a>
@@ -71,7 +79,7 @@ export default function ContactPage() {
       </section>
 
       {/* Quote form reuse */}
-      <QuoteForm />
+      <QuoteForm houseTypes={houseTypes} />
     </div>
   );
 }

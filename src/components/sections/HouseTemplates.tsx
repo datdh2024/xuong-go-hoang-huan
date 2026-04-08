@@ -2,8 +2,10 @@ import Image from "next/image";
 import SectionHeading from "@/components/ui/SectionHeading";
 import { HOUSE_TEMPLATES } from "@/lib/data";
 import { LayoutGrid, Columns2, Columns3 } from "lucide-react";
+import type { SanityHouseTemplate } from "@/sanity/lib/types";
 
-export default function HouseTemplates() {
+export default function HouseTemplates({ templates = HOUSE_TEMPLATES }: { templates?: SanityHouseTemplate[] }) {
+  if (templates.length === 0) return null;
   return (
     <section className="py-20 bg-wood-100 dark:bg-wood-900">
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
@@ -13,8 +15,8 @@ export default function HouseTemplates() {
           description="Tham khảo các mẫu nhà gỗ cổ truyền phổ biến. Chúng tôi tư vấn và thiết kế theo yêu cầu riêng của từng gia đình"
         />
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {HOUSE_TEMPLATES.map((template) => (
-            <div key={template.id} className="bg-white dark:bg-wood-700 rounded-lg overflow-hidden shadow-sm border border-wood-200 dark:border-wood-600 hover:shadow-md transition-shadow group">
+          {templates.map((template) => (
+            <div key={template.name} className="bg-white dark:bg-wood-700 rounded-lg overflow-hidden shadow-sm border border-wood-200 dark:border-wood-600 hover:shadow-md transition-shadow group">
               <div className="relative h-44 overflow-hidden">
                 <Image
                   src={template.thumbnail}
