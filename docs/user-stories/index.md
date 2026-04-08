@@ -6,4 +6,4 @@
 
 ## Dark Mode
 
-- [US-17 — Dark Mode Support](dark-mode/US-17-dark-mode.md) — System-aware dark mode with manual toggle and localStorage persistence
+- [US-17 — Dark Mode Support](dark-mode/US-17-dark-mode.md) — Dark mode by default with manual toggle and localStorage persistence

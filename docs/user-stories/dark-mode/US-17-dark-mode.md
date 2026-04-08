@@ -13,7 +13,7 @@ Provide a dark color scheme that activates automatically based on the user's sys
 ## Current State (Implemented 2026-04-08)
 
 - Dark mode is **fully implemented** using `next-themes` with Tailwind `class` strategy
-- **ThemeProvider** wraps the app in `src/components/providers/ThemeProvider.tsx` (`attribute="class"`, `defaultTheme="system"`, `storageKey="theme"`)
+- **ThemeProvider** wraps the app in `src/components/providers/ThemeProvider.tsx` (`attribute="class"`, `defaultTheme="dark"`, `storageKey="theme"`)
 - **ThemeToggle** button (Sun/Moon icons via `lucide-react`) in Header — visible on both desktop and mobile without opening the hamburger menu
 - Uses `useSyncExternalStore` hydration guard to prevent SSR mismatch
 - `<html>` element has `suppressHydrationWarning`; `<body>` uses `dark:bg-wood-800 dark:text-wood-100`
@@ -22,11 +22,12 @@ Provide a dark color scheme that activates automatically based on the user's sys
 - Footer already dark-styled — minimal changes needed, remains visually consistent
 - **Known limitation:** next-themes does not validate stored theme values (TC-17-13)
 - **Bug fix (2026-04-08):** Removed hardcoded `background-color` and `color` from the `body` rule in `globals.css` — these had higher specificity than Tailwind's `dark:bg-wood-800` / `dark:text-wood-100` utility classes, causing near-invisible text in dark mode across all pages
+- **Enhancement (2026-04-08):** Default theme changed from `"system"` to `"dark"`; project detail page (`/cong-trinh/[slug]`) hero overlay improved with gradient + text drop-shadow; added `dark:` text variants for description headings, body text, and sidebar
 
 ## Acceptance Criteria
 
 1. Dark mode is implemented using Tailwind `class` strategy (toggled via a `dark` class on the `<html>` element)
-2. On first visit, the system preference (`prefers-color-scheme: dark`) is respected — if the user's OS is in dark mode, the site shows dark mode; otherwise light mode
+2. On first visit, the site defaults to dark mode. The user can override via the toggle, and the choice is persisted to localStorage
 3. A toggle button (sun/moon icon) is added to the Header, visible on both desktop and mobile views
 4. Clicking the toggle switches between light and dark mode immediately
 5. The user's manual preference is persisted to `localStorage` so it survives page reloads and return visits
@@ -37,8 +38,8 @@ Provide a dark color scheme that activates automatically based on the user's sys
 ## Steps (User Flow)
 
 1. User visits the website for the first time
-2. The site detects the user's system color scheme preference
-3. If the system is in dark mode, the site renders in dark mode automatically
+2. The site defaults to dark mode
+3. The site renders in dark mode automatically
 4. User sees a sun/moon icon button in the header (next to nav links on desktop, in the header bar on mobile)
 5. User clicks the toggle — the site switches to the opposite mode instantly
 6. User navigates to other pages — the chosen mode persists
@@ -59,4 +60,4 @@ Provide a dark color scheme that activates automatically based on the user's sys
 
 ---
 
-*Last synced: 2026-04-08 (updated for globals.css dark mode fix)*
+*Last synced: 2026-04-08 (default theme → dark; project detail dark mode text improvements)*

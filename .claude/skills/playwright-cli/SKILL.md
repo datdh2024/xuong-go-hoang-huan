@@ -6,6 +6,18 @@ allowed-tools: Bash(playwright-cli:*)
 
 # Browser Automation with playwright-cli
 
+## Default: Save all output to `.playwright-cli/`
+
+**Always** save screenshots, PDFs, and other file output to the `.playwright-cli/` directory in the project root (already git-ignored). Use `--filename=.playwright-cli/<name>` for any `screenshot` or `pdf` command:
+
+```bash
+playwright-cli screenshot --filename=.playwright-cli/page.png
+playwright-cli screenshot e5 --filename=.playwright-cli/element.png
+playwright-cli pdf --filename=.playwright-cli/page.pdf
+```
+
+When no `--filename` is provided, snapshots and console logs already save to `.playwright-cli/` automatically. Only screenshots and PDFs need the explicit path.
+
 ## Default: Always open in headed mode with persistent Chrome profile
 
 When opening the browser, **always** use `--headed` and `--profile=chrome-profile` and `--browser=chrome` flags:
@@ -93,10 +105,9 @@ playwright-cli mousewheel 0 100
 ### Save as
 
 ```bash
-playwright-cli screenshot
-playwright-cli screenshot e5
-playwright-cli screenshot --filename=page.png
-playwright-cli pdf --filename=page.pdf
+playwright-cli screenshot --filename=.playwright-cli/page.png
+playwright-cli screenshot e5 --filename=.playwright-cli/element.png
+playwright-cli pdf --filename=.playwright-cli/page.pdf
 ```
 
 ### Tabs

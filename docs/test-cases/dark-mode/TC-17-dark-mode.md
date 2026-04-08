@@ -6,25 +6,26 @@
 
 ## Happy Path
 
-### TC-17-01: System dark preference is respected on first visit
+### TC-17-01: Default theme is dark on first visit
 
 - **Type:** happy_path
-- **Description:** First-time visitor with OS dark mode enabled sees the site in dark mode
-- **Precondition:** No localStorage theme entry exists; OS is set to dark mode
+- **Description:** First-time visitor sees the site in dark mode regardless of OS preference
+- **Precondition:** No localStorage theme entry exists
 - **Steps:**
-  1. Open the website at `/` with system `prefers-color-scheme: dark`
+  1. Open the website at `/`
   2. Observe the page rendering
 - **Expected Result:** The `<html>` element has class `dark`; background is deep charcoal; text is warm off-white; gold accents are visible
 
-### TC-17-02: System light preference is respected on first visit
+### TC-17-02: First-time visitor can switch to light mode via toggle
 
 - **Type:** happy_path
-- **Description:** First-time visitor with OS light mode enabled sees the site in light mode
-- **Precondition:** No localStorage theme entry exists; OS is set to light mode
+- **Description:** First-time visitor starts in dark mode and can switch to light
+- **Precondition:** No localStorage theme entry exists
 - **Steps:**
-  1. Open the website at `/` with system `prefers-color-scheme: light`
-  2. Observe the page rendering
-- **Expected Result:** The `<html>` element does NOT have class `dark`; the site appears in the default light wood/gold palette
+  1. Open the website at `/`
+  2. Verify site is in dark mode by default
+  3. Click the toggle button in the header
+- **Expected Result:** The `<html>` element no longer has class `dark`; the site appears in the light wood/gold palette; localStorage stores the preference
 
 ### TC-17-03: Toggle button switches from light to dark mode
 
@@ -116,8 +117,9 @@
   2. Navigate to `/` (homepage) — check hero slider, highlights, projects grid, FAQ, quote form
   3. Navigate to `/gioi-thieu` — check about page content
   4. Navigate to `/cong-trinh` — check projects listing
-  5. Navigate to `/lien-he` — check contact form and info cards
-- **Expected Result:** All pages have consistent dark mode styling; no white/light background sections that break the dark theme; text is readable; gold accents are visible
+  5. Navigate to `/cong-trinh/[slug]` — check project detail: hero title readability, description headings, body text, sidebar card (background, borders, labels, values)
+  6. Navigate to `/lien-he` — check contact form and info cards
+- **Expected Result:** All pages have consistent dark mode styling; no white/light background sections that break the dark theme; text is readable; gold accents are visible; project detail hero title has drop shadow and gradient overlay for contrast
 
 ### TC-17-11: Footer appearance in dark mode
 
@@ -179,11 +181,11 @@ Cases bypassed:   1
 Cases failed:     0
 Regression risk:  LOW
 Date:             2026-04-08
-Notes:            Re-verified after globals.css dark mode fix; TC-17-13 BYPASS (next-themes limitation)
+Notes:            Re-verified after default theme → dark and project detail dark mode improvements
 
 Details:
-  TC-17-01 (happy_path):  PASS — dark class applied, body bg rgb(42,16,5) (wood-800), gold accents visible
-  TC-17-02 (happy_path):  PASS — no dark class, light wood/gold palette
+  TC-17-01 (happy_path):  PASS — dark class present on first visit (no localStorage), body bg rgb(42,16,5) (wood-800)
+  TC-17-02 (happy_path):  PASS — toggle switches default dark to light, localStorage stores "light", bg becomes wood-50
   TC-17-03 (happy_path):  PASS — toggle switches to dark, body bg becomes wood-800, button label updates
   TC-17-04 (happy_path):  PASS — toggle switches back to light
   TC-17-05 (happy_path):  PASS — dark mode persists on /gioi-thieu after navigation
@@ -191,7 +193,7 @@ Details:
   TC-17-07 (happy_path):  PASS — toggle visible and functional on mobile (375x812)
   TC-17-08 (edge_case):   PASS — dark class present at commit time, no flash of light mode
   TC-17-09 (edge_case):   PASS — localStorage light overrides system dark
-  TC-17-10 (edge_case):   PASS — all 4 pages render correctly: homepage, gioi-thieu, cong-trinh, lien-he
+  TC-17-10 (edge_case):   PASS — all 5 pages render correctly: homepage, gioi-thieu, cong-trinh, cong-trinh/[slug], lien-he; project detail has bright headings, readable text, dark sidebar
   TC-17-11 (edge_case):   PASS — footer consistent in dark mode
   TC-17-12 (edge_case):   PASS — form inputs readable, dark bg, light text, gold buttons
   TC-17-13 (error_case):  BYPASS — known next-themes limitation; invalid localStorage value applied as class instead of fallback
