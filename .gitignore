@@ -43,6 +43,8 @@ yarn-error.log*
 # chrome profile for playwright
 /chrome-profile
 
+.claude/settings.local.json
+
 # typescript
 *.tsbuildinfo
 next-env.d.ts
