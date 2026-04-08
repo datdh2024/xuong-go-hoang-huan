@@ -42,7 +42,7 @@ export default function ProjectsPage() {
                 className={`px-4 py-2 rounded-full text-sm font-medium border transition-colors ${
                   cat === "Tất cả"
                     ? "bg-wood-600 text-white border-wood-600"
-                    : "border-wood-300 text-wood-600 hover:bg-wood-600 hover:text-white hover:border-wood-600"
+                    : "border-wood-300 dark:border-wood-500 text-wood-600 dark:text-wood-200 hover:bg-wood-600 hover:text-white hover:border-wood-600"
                 }`}
               >
                 {cat}
