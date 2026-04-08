@@ -5,17 +5,17 @@ export type PortableTextBlock = Record<string, any>;
 export interface SanityHeroSlide {
   image: string;
   headline: string;
-  subheadline: string;
-  ctaLabel: string;
-  ctaLink: string;
-  order: number;
+  subheadline?: string;
+  ctaLabel?: string;
+  ctaLink?: string;
+  order?: number;
 }
 
 export interface SanityHighlight {
   icon: string;
   title: string;
   description: string;
-  order: number;
+  order?: number;
 }
 
 export interface SanityProject {
@@ -24,10 +24,10 @@ export interface SanityProject {
   location: string;
   category: string;
   thumbnail: string;
-  images: string[];
+  images?: string[];
   description: string;
   completedYear: number;
-  featured: boolean;
+  featured?: boolean;
 }
 
 export interface SanityProjectCategory {
@@ -44,14 +44,14 @@ export interface SanityHouseTemplate {
     columns: number;
   };
   description: string;
-  featured: boolean;
+  featured?: boolean;
 }
 
 export interface SanityAboutPage {
-  heroImage: string;
+  heroImage?: string;
   story: PortableTextBlock[];
   highlights: Array<{ number: string; label: string }>;
-  teamDescription: string;
+  teamDescription?: string;
 }
 
 export interface SanityFaqItem {
