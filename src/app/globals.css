@@ -1,5 +1,7 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 @theme inline {
   --font-cormorant: var(--font-cormorant);
   --font-be-vietnam: var(--font-be-vietnam);
