@@ -68,7 +68,36 @@
       "Bash(npx tsc:*)",
       "Bash(npm ls:*)",
       "Bash(pnpm add:*)",
-      "Bash(npx eslint:*)"
+      "Bash(npx eslint:*)",
+      "Bash(grep -E \"\\\\.\\(png|jpg|jpeg|webp|svg\\)$\")",
+      "Bash(xargs basename:*)",
+      "Bash(curl -s http://localhost:3000)",
+      "Bash(curl -s http://localhost:3000/robots.txt)",
+      "Bash(curl -s http://localhost:3000/gioi-thieu)",
+      "Bash(curl -sI http://localhost:3000/og-image.jpg)",
+      "Bash(curl -s http://localhost:3000/cong-trinh/nha-tho-ho-bac-ninh)",
+      "Bash(curl -s http://localhost:3000__TRACKED_VAR__)",
+      "Bash(curl -s http://localhost:3000/cong-trinh)",
+      "Bash(curl -s http://localhost:3000/lien-he)",
+      "Bash(curl -s http://localhost:3000/sitemap.xml)",
+      "Bash(curl -s http://localhost:3000/cong-trinh/nha-tho-ho-dai-tao)",
+      "Bash(curl:*)",
+      "Read(//tmp/**)",
+      "Bash(identify /tmp/og-image.jpg)",
+      "Bash(python3 -c \"from PIL import Image; img=Image.open\\('/tmp/og-image.jpg'\\); print\\(f'{img.size[0]}x{img.size[1]}'\\)\")"
+    ]
+  },
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \".claude/hooks/block-auto-commit.js\""
+          }
+        ]
+      }
     ]
   }
 }

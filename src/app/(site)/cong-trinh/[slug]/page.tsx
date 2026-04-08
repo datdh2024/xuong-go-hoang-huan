@@ -4,6 +4,7 @@ import Link from "next/link";
 import { MapPin, CalendarDays, ArrowLeft, Tag } from "lucide-react";
 import { getProjectBySlug, getAllProjects } from "@/sanity/lib/fetchers";
 import { notFound } from "next/navigation";
+import { generateBreadcrumbJsonLd } from "@/lib/seo";
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -14,6 +15,17 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: project.title,
     description: project.description,
+    openGraph: {
+      title: project.title,
+      description: project.description,
+      url: `/cong-trinh/${slug}`,
+      images: project.thumbnail
+        ? [{ url: project.thumbnail, alt: project.title }]
+        : undefined,
+    },
+    alternates: {
+      canonical: `/cong-trinh/${slug}`,
+    },
   };
 }
 
@@ -31,6 +43,18 @@ export default async function ProjectDetailPage({ params }: Props) {
 
   return (
     <div className="pt-24">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(
+            generateBreadcrumbJsonLd([
+              { name: "Trang chủ", path: "/" },
+              { name: "Công trình", path: "/cong-trinh" },
+              { name: project.title, path: `/cong-trinh/${slug}` },
+            ])
+          ),
+        }}
+      />
       {/* Hero image */}
       <div className="relative h-72 md:h-[500px]">
         <Image src={project.thumbnail} alt={project.title} fill className="object-cover" priority />

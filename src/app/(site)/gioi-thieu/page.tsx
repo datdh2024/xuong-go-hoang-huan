@@ -2,10 +2,22 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import SectionHeading from "@/components/ui/SectionHeading";
 import { getAboutPage } from "@/sanity/lib/fetchers";
+import { generateBreadcrumbJsonLd } from "@/lib/seo";
 
 export const metadata: Metadata = {
   title: "Giới thiệu",
-  description: "Xưởng Gỗ Hoàng Huân - 40 năm tâm huyết với nghề mộc truyền thống, chuyên thi công nhà gỗ cổ truyền Bắc Bộ.",
+  description:
+    "Xưởng Gỗ Hoàng Huân - 40 năm tâm huyết với nghề mộc truyền thống, chuyên thi công nhà gỗ cổ truyền Bắc Bộ.",
+  openGraph: {
+    title: "Giới thiệu",
+    description:
+      "Xưởng Gỗ Hoàng Huân - 40 năm tâm huyết với nghề mộc truyền thống, chuyên thi công nhà gỗ cổ truyền Bắc Bộ.",
+    url: "/gioi-thieu",
+    images: ["/og-image.jpg"],
+  },
+  alternates: {
+    canonical: "/gioi-thieu",
+  },
 };
 
 const STATS = [
@@ -24,6 +36,17 @@ export default async function AboutPage() {
 
   return (
     <div className="pt-24">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(
+            generateBreadcrumbJsonLd([
+              { name: "Trang chủ", path: "/" },
+              { name: "Giới thiệu", path: "/gioi-thieu" },
+            ])
+          ),
+        }}
+      />
       {/* Hero */}
       <div className="relative h-72 md:h-96">
         <Image

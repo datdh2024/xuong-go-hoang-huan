@@ -1,3 +1,5 @@
+import type { Metadata } from "next";
+import { generateLocalBusinessJsonLd } from "@/lib/seo";
 import HeroSlider from "@/components/sections/HeroSlider";
 import Highlights from "@/components/sections/Highlights";
 import ProjectsGrid from "@/components/sections/ProjectsGrid";
@@ -12,6 +14,12 @@ import {
   getFaqItems,
 } from "@/sanity/lib/fetchers";
 
+export const metadata: Metadata = {
+  alternates: {
+    canonical: "/",
+  },
+};
+
 export default async function HomePage() {
   const [heroSlides, highlights, projects, templates, faqs] = await Promise.all([
     getHeroSlides(),
@@ -25,6 +33,12 @@ export default async function HomePage() {
 
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(generateLocalBusinessJsonLd()),
+        }}
+      />
       <HeroSlider slides={heroSlides} />
       <Highlights highlights={highlights} />
       <ProjectsGrid projects={projects} />

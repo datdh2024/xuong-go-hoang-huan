@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Cormorant_Garamond, Be_Vietnam_Pro } from "next/font/google";
 import ThemeProvider from "@/components/providers/ThemeProvider";
+import { SITE_URL } from "@/lib/data";
 import "./globals.css";
 
 const cormorant = Cormorant_Garamond({
@@ -19,6 +20,7 @@ const beVietnam = Be_Vietnam_Pro({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(SITE_URL),
   title: {
     default: "Xưởng Gỗ Hoàng Huân - Giữ Hồn Kiến Trúc Việt",
     template: "%s | Xưởng Gỗ Hoàng Huân",
@@ -40,6 +42,26 @@ export const metadata: Metadata = {
       "Chuyên thi công nhà gỗ cổ truyền, nhà thờ họ, đồ thờ gỗ cao cấp. 40 năm kinh nghiệm.",
     type: "website",
     locale: "vi_VN",
+    url: "/",
+    siteName: "Xưởng Gỗ Hoàng Huân",
+    images: [
+      {
+        url: "/og-image.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Xưởng Gỗ Hoàng Huân - Giữ Hồn Kiến Trúc Việt",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Xưởng Gỗ Hoàng Huân - Giữ Hồn Kiến Trúc Việt",
+    description:
+      "Chuyên thi công nhà gỗ cổ truyền, nhà thờ họ, đồ thờ gỗ cao cấp. 40 năm kinh nghiệm.",
+    images: ["/og-image.jpg"],
+  },
+  alternates: {
+    canonical: "/",
   },
 };
 

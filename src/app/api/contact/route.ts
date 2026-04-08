@@ -24,7 +24,7 @@ Ghi chú: ${note || "Không có"}
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        from: "noreply@xuonggohoanghuan.vn",
+        from: "datdh2024@gmail.com",
         to: process.env.CONTACT_EMAIL,
         subject: `[Báo giá] ${name} - ${houseType} - ${province}`,
         text: body,

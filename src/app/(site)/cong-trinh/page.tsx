@@ -2,10 +2,22 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import ProjectsListing from "@/components/sections/ProjectsListing";
 import { getAllProjects, getProjectCategories } from "@/sanity/lib/fetchers";
+import { generateBreadcrumbJsonLd } from "@/lib/seo";
 
 export const metadata: Metadata = {
   title: "Công trình",
-  description: "Các công trình nhà gỗ cổ truyền đã thi công của Xưởng Gỗ Hoàng Huân trên khắp cả nước.",
+  description:
+    "Các công trình nhà gỗ cổ truyền đã thi công của Xưởng Gỗ Hoàng Huân trên khắp cả nước.",
+  openGraph: {
+    title: "Công trình",
+    description:
+      "Các công trình nhà gỗ cổ truyền đã thi công của Xưởng Gỗ Hoàng Huân trên khắp cả nước.",
+    url: "/cong-trinh",
+    images: ["/og-image.jpg"],
+  },
+  alternates: {
+    canonical: "/cong-trinh",
+  },
 };
 
 export default async function ProjectsPage() {
@@ -16,6 +28,17 @@ export default async function ProjectsPage() {
 
   return (
     <div className="pt-24">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(
+            generateBreadcrumbJsonLd([
+              { name: "Trang chủ", path: "/" },
+              { name: "Công trình", path: "/cong-trinh" },
+            ])
+          ),
+        }}
+      />
       <div className="relative h-64 md:h-80">
         <Image
           src="https://images.unsplash.com/photo-1504198322253-cfa87a0ff25f?w=1600&q=80"

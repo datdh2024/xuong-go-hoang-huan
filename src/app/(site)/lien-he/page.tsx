@@ -3,10 +3,22 @@ import Image from "next/image";
 import { Phone, Mail, MapPin, Clock, Facebook } from "lucide-react";
 import QuoteForm from "@/components/sections/QuoteForm";
 import { getSiteSettings, getFeaturedTemplates } from "@/sanity/lib/fetchers";
+import { generateBreadcrumbJsonLd } from "@/lib/seo";
 
 export const metadata: Metadata = {
   title: "Liên hệ",
-  description: "Liên hệ với Xưởng Gỗ Hoàng Huân để được tư vấn và báo giá thi công nhà gỗ cổ truyền miễn phí.",
+  description:
+    "Liên hệ với Xưởng Gỗ Hoàng Huân để được tư vấn và báo giá thi công nhà gỗ cổ truyền miễn phí.",
+  openGraph: {
+    title: "Liên hệ",
+    description:
+      "Liên hệ với Xưởng Gỗ Hoàng Huân để được tư vấn và báo giá thi công nhà gỗ cổ truyền miễn phí.",
+    url: "/lien-he",
+    images: ["/og-image.jpg"],
+  },
+  alternates: {
+    canonical: "/lien-he",
+  },
 };
 
 export default async function ContactPage() {
@@ -20,6 +32,17 @@ export default async function ContactPage() {
 
   return (
     <div className="pt-24">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(
+            generateBreadcrumbJsonLd([
+              { name: "Trang chủ", path: "/" },
+              { name: "Liên hệ", path: "/lien-he" },
+            ])
+          ),
+        }}
+      />
       {/* Hero */}
       <div className="relative h-56 md:h-72">
         <Image
