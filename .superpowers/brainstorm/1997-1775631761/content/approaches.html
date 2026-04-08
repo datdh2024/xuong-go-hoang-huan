@@ -1,0 +1,85 @@
+<h2>Dark Mode — Implementation Approaches</h2>
+<p class="subtitle">Three ways to implement dark mode with next-themes + Tailwind CSS v4</p>
+
+<div class="options">
+  <div class="option" data-choice="a" onclick="toggleSelect(this)" style="border-left: 4px solid #f59e0b;">
+    <div class="letter">A</div>
+    <div class="content">
+      <h3>🏆 Recommended: Tailwind <code>darkMode: 'class'</code> + next-themes</h3>
+      <p><strong>How:</strong> Configure Tailwind's <code>darkMode: 'class'</code>. Wrap app in <code>&lt;ThemeProvider&gt;</code> from next-themes. Add <code>dark:</code> variant classes to every component.</p>
+      <div class="pros-cons">
+        <div class="pros">
+          <h4>Pros</h4>
+          <ul>
+            <li>Industry standard pattern — well documented</li>
+            <li>next-themes handles SSR, flash prevention, localStorage, system preference</li>
+            <li>Each component explicitly declares its dark styles</li>
+            <li>Easy to audit — grep for <code>dark:</code> to find all dark mode styles</li>
+          </ul>
+        </div>
+        <div class="cons">
+          <h4>Cons</h4>
+          <ul>
+            <li>Must touch every component to add <code>dark:</code> classes</li>
+            <li>HTML class strings get longer</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="option" data-choice="b" onclick="toggleSelect(this)">
+    <div class="letter">B</div>
+    <div class="content">
+      <h3>CSS Variables Override</h3>
+      <p><strong>How:</strong> Define CSS variables for all colors in globals.css, then override them under <code>.dark</code> selector. Components use variables instead of direct color classes.</p>
+      <div class="pros-cons">
+        <div class="pros">
+          <h4>Pros</h4>
+          <ul>
+            <li>Components don't need <code>dark:</code> classes — colors switch automatically</li>
+            <li>Fewer changes per component</li>
+          </ul>
+        </div>
+        <div class="cons">
+          <h4>Cons</h4>
+          <ul>
+            <li>Requires rewriting ALL existing color classes to use CSS variables</li>
+            <li>Loses Tailwind's utility-first approach — harder to reason about colors</li>
+            <li>Massive refactor of existing components</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="option" data-choice="c" onclick="toggleSelect(this)">
+    <div class="letter">C</div>
+    <div class="content">
+      <h3>Hybrid: CSS Variables for Base + dark: for Exceptions</h3>
+      <p><strong>How:</strong> Use CSS variables for the most common colors (bg, text) that auto-switch, but use <code>dark:</code> classes for component-specific overrides.</p>
+      <div class="pros-cons">
+        <div class="pros">
+          <h4>Pros</h4>
+          <ul>
+            <li>Fewer <code>dark:</code> classes needed per component</li>
+            <li>Base colors switch automatically</li>
+          </ul>
+        </div>
+        <div class="cons">
+          <h4>Cons</h4>
+          <ul>
+            <li>Two mental models — devs must know which approach applies where</li>
+            <li>Still requires CSS variable refactor for base colors</li>
+            <li>Harder to maintain consistency</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section" style="margin-top: 2rem; padding: 1rem; background: rgba(245, 158, 11, 0.1); border-radius: 8px;">
+  <h3>💡 Recommendation: Approach A</h3>
+  <p>The codebase already uses Tailwind utility classes everywhere. Adding <code>dark:</code> variants is the natural extension — no refactoring needed, just augmenting existing classes. next-themes handles all the tricky SSR/hydration/localStorage logic. This is the standard approach for Next.js + Tailwind projects.</p>
+</div>
