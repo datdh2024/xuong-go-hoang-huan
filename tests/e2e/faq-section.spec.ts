@@ -76,7 +76,7 @@ test.describe('SR-906: FAQ Section with Sanity CMS', () => {
     await expect(faqSection.getByRole('region').nth(0)).toBeVisible()
 
     await buttons.nth(1).click()
-    await expect(faqSection.getByRole('region').nth(0)).toBeHidden()
-    await expect(faqSection.getByRole('region').nth(1)).toBeVisible()
+    await expect(faqSection.locator('[role="region"]').nth(0)).toBeHidden()
+    await expect(faqSection.locator('[role="region"]').nth(1)).toBeVisible()
   })
 })

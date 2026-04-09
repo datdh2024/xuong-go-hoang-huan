@@ -1,12 +1,12 @@
 ---
 name: sync-docs
 description: >
-  Synchronize all project documentation artifacts with code changes — user stories, test cases, index files, and test results. Use this skill after completing implementation, merging PRs, fixing bugs, or any time code has changed and docs may be out of sync. Trigger when the user says "sync docs", "update docs", "sync artifacts", or after any implementation/fix session ends. Also use when git diff shows changes that could affect documented behaviors, acceptance criteria, or test cases.
+  Synchronize all project documentation and test artifacts with code changes — user stories, test cases, index files, unit tests (Vitest), and E2E tests (Playwright). Use this skill after completing implementation, merging PRs, fixing bugs, or any time code has changed and docs/tests may be out of sync. Trigger when the user says "sync docs", "update docs", "sync artifacts", or after any implementation/fix session ends. Also use when git diff shows changes that could affect documented behaviors, acceptance criteria, unit tests, or E2E tests.
 ---
 
 # sync-docs
 
-Analyze code changes and synchronize all documentation artifacts — user stories, test cases, index files, and self-test results.
+Analyze code changes and synchronize all documentation artifacts — user stories, test cases, index files, unit tests, and E2E tests.
 
 ---
 
@@ -19,12 +19,14 @@ Analyze code changes and synchronize all documentation artifacts — user storie
 
 ## Output
 
-| Artifact           | Path                                          | Action          |
-| ------------------ | --------------------------------------------- | --------------- |
-| User Stories       | `docs/user-stories/[group]/US-[id]-[name].md` | Create / Update |
-| Test Cases         | `docs/test-cases/[group]/TC-[id]-[name].md`   | Create / Update |
-| User Stories Index | `docs/user-stories/index.md`                  | Update          |
-| Test Cases Index   | `docs/test-cases/index.md`                    | Update          |
+| Artifact           | Path                                          | Action                  |
+| ------------------ | --------------------------------------------- | ----------------------- |
+| User Stories       | `docs/user-stories/[group]/US-[id]-[name].md` | Create / Update         |
+| Test Cases         | `docs/test-cases/[group]/TC-[id]-[name].md`   | Create / Update         |
+| User Stories Index | `docs/user-stories/index.md`                  | Update                  |
+| Test Cases Index   | `docs/test-cases/index.md`                    | Update                  |
+| Unit Tests         | `src/__tests__/[category]/[Name].test.ts(x)`  | Create / Update / Run   |
+| E2E Tests          | `tests/e2e/[name].spec.ts`                    | Create / Update / Run   |
 
 ---
 
@@ -112,14 +114,67 @@ cases:
     expected_result: string
 ```
 
-### Step 5 — Update Index Files
+### Step 5 — Sync Unit Tests
 
-After all doc updates:
+For each component, hook, utility, or schema affected by code changes, ensure corresponding unit tests in `src/__tests__/` are up to date:
+
+1. **Map changed files to test files** using the naming convention:
+   - `src/components/[Name].tsx` → `src/__tests__/components/[Name].test.tsx`
+   - `src/sanity/schemas/[name].ts` → `src/__tests__/sanity/[name].schema.test.ts`
+   - `src/sanity/lib/queries.ts` → `src/__tests__/sanity/faqQuery.test.ts` (or relevant query test)
+   - `src/sanity/lib/fetchers.ts` → `src/__tests__/sanity/fetchers.test.ts`
+
+2. **If the test file exists and behavior changed**: update test cases to match the new behavior — add/remove/modify `it()` blocks, update expected renders, mock data, or assertions.
+
+3. **If the test file exists but only internal refactor** (same public API/props): verify tests still pass — no changes needed unless imports or mocks broke.
+
+4. **If a new component/module was added without tests**: create a new test file following the existing patterns in `src/__tests__/`. Use the same testing stack (Vitest + React Testing Library). Include at minimum:
+   - A render test (component renders without crashing)
+   - Tests for key props/behaviors
+   - Edge cases if applicable
+
+5. **Run affected unit tests** to verify:
+
+```bash
+npx vitest run src/__tests__/[path-to-test-file]
+```
+
+If tests fail, fix the test (or flag the implementation issue) before proceeding.
+
+### Step 6 — Sync E2E Tests
+
+For each user-facing flow or page affected by code changes, ensure corresponding E2E tests in `tests/e2e/` are up to date:
+
+1. **Map changed features to E2E spec files** using existing specs:
+   - Dark mode changes → `tests/e2e/dark-mode.spec.ts`
+   - FAQ section changes → `tests/e2e/faq-section.spec.ts`
+   - SEO/metadata changes → `tests/e2e/seo.spec.ts`
+   - CMS integration changes → `tests/e2e/cms-integration.spec.ts`
+   - 404/not-found changes → `tests/e2e/not-found.spec.ts`
+
+2. **If the spec file exists and user flow changed**: update test steps, selectors, or assertions to match the new behavior.
+
+3. **If a new user-facing feature was added without E2E coverage**: create a new spec file `tests/e2e/[feature-name].spec.ts` following existing Playwright patterns. Include at minimum:
+   - Navigation to the relevant page
+   - Visibility checks for key elements
+   - Core interaction flow (click, form submit, etc.)
+
+4. **Run affected E2E tests** to verify:
+
+```bash
+npx playwright test tests/e2e/[spec-file]
+```
+
+If tests fail, fix the test (or flag the implementation issue) before proceeding.
+
+### Step 7 — Update Index Files
+
+After all doc and test updates:
 
 1. **`docs/user-stories/index.md`**: ensure every story file has an entry. Add new entries for newly created stories. Update descriptions if they no longer match.
 2. **`docs/test-cases/index.md`**: ensure every test case file has an entry. Update the count summary (e.g., "14 test cases (7 happy path, 5 edge case, 2 error case)") to reflect actual counts.
 
-### Step 6 — Cross-reference Check
+### Step 8 — Cross-reference Check
 
 Verify bidirectional links are intact:
 
@@ -128,21 +183,25 @@ Verify bidirectional links are intact:
 - Index files have correct relative paths
 - No broken links to deleted or renamed files
 
-### Step 7 — Summary Report
+### Step 9 — Summary Report
 
 Present a summary to the user:
 
 ```
 Sync-docs complete
 ─────────────────────────────────
-Changes analyzed:  [N] files changed, [N] commits
-Stories updated:   [list or "none"]
-Stories created:   [list or "none"]
-Test cases updated: [list or "none"]
-Test cases added:  [N] new cases
-Test results reset: [list of TC IDs reset to PENDING]
-Index files:       [updated / no changes]
-Cross-references:  [OK / issues found]
+Changes analyzed:    [N] files changed, [N] commits
+Stories updated:     [list or "none"]
+Stories created:     [list or "none"]
+Test cases updated:  [list or "none"]
+Test cases added:    [N] new cases
+Test results reset:  [list of TC IDs reset to PENDING]
+Unit tests synced:   [list of updated/created test files or "none"]
+Unit tests result:   [PASS / FAIL — N passed, N failed]
+E2E tests synced:    [list of updated/created spec files or "none"]
+E2E tests result:    [PASS / FAIL — N passed, N failed]
+Index files:         [updated / no changes]
+Cross-references:    [OK / issues found]
 ─────────────────────────────────
 ```
 

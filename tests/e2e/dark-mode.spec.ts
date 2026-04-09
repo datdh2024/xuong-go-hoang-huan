@@ -1,8 +1,8 @@
 import { test, expect } from "@playwright/test";
 
 test.describe("TC-17: Dark Mode Support", () => {
-  // TC-17-01: System dark preference is respected on first visit
-  test("TC-17-01: respects system dark preference on first visit", async ({
+  // TC-17-01: Default theme is dark on first visit
+  test("TC-17-01: defaults to dark mode on first visit", async ({
     browser,
   }) => {
     const context = await browser.newContext({ colorScheme: "dark" });
@@ -12,13 +12,21 @@ test.describe("TC-17: Dark Mode Support", () => {
     await context.close();
   });
 
-  // TC-17-02: System light preference is respected on first visit
-  test("TC-17-02: respects system light preference on first visit", async ({
+  // TC-17-02: First-time visitor can switch to light mode via toggle
+  test("TC-17-02: defaults to dark even with system light preference", async ({
     browser,
   }) => {
     const context = await browser.newContext({ colorScheme: "light" });
     const page = await context.newPage();
     await page.goto("/");
+    await expect(page.locator("html")).toHaveClass(/dark/);
+
+    const toggle = page
+      .getByRole("button", { name: /switch to light mode/i })
+      .first();
+    await toggle.waitFor();
+    await toggle.click();
+
     await expect(page.locator("html")).not.toHaveClass(/dark/);
     await context.close();
   });
@@ -28,14 +36,21 @@ test.describe("TC-17: Dark Mode Support", () => {
     const context = await browser.newContext({ colorScheme: "light" });
     const page = await context.newPage();
     await page.goto("/");
+
+    // Default is dark — switch to light first
+    const toggleToLight = page
+      .getByRole("button", { name: /switch to light mode/i })
+      .first();
+    await toggleToLight.waitFor();
+    await toggleToLight.click();
     await expect(page.locator("html")).not.toHaveClass(/dark/);
 
-    const toggle = page
+    // Now switch back to dark
+    const toggleToDark = page
       .getByRole("button", { name: /switch to dark mode/i })
       .first();
-    await toggle.waitFor();
-    await toggle.click();
-
+    await toggleToDark.waitFor();
+    await toggleToDark.click();
     await expect(page.locator("html")).toHaveClass(/dark/);
     await context.close();
   });
@@ -65,16 +80,17 @@ test.describe("TC-17: Dark Mode Support", () => {
     const page = await context.newPage();
     await page.goto("/");
 
+    // Default is dark — switch to light, then verify it persists across nav
     const toggle = page
-      .getByRole("button", { name: /switch to dark mode/i })
+      .getByRole("button", { name: /switch to light mode/i })
       .first();
     await toggle.waitFor();
     await toggle.click();
-    await expect(page.locator("html")).toHaveClass(/dark/);
+    await expect(page.locator("html")).not.toHaveClass(/dark/);
 
     await page.click('a[href="/gioi-thieu"]');
     await page.waitForURL("/gioi-thieu");
-    await expect(page.locator("html")).toHaveClass(/dark/);
+    await expect(page.locator("html")).not.toHaveClass(/dark/);
     await context.close();
   });
 
@@ -86,18 +102,19 @@ test.describe("TC-17: Dark Mode Support", () => {
     const page = await context.newPage();
     await page.goto("/");
 
+    // Default is dark — switch to light and verify persistence
     const toggle = page
-      .getByRole("button", { name: /switch to dark mode/i })
+      .getByRole("button", { name: /switch to light mode/i })
       .first();
     await toggle.waitFor();
     await toggle.click();
-    await expect(page.locator("html")).toHaveClass(/dark/);
+    await expect(page.locator("html")).not.toHaveClass(/dark/);
 
     const theme = await page.evaluate(() => localStorage.getItem("theme"));
-    expect(theme).toBe("dark");
+    expect(theme).toBe("light");
 
     await page.reload();
-    await expect(page.locator("html")).toHaveClass(/dark/);
+    await expect(page.locator("html")).not.toHaveClass(/dark/);
     await context.close();
   });
 
@@ -112,13 +129,14 @@ test.describe("TC-17: Dark Mode Support", () => {
     const page = await context.newPage();
     await page.goto("/");
 
+    // Default is dark — toggle should show "switch to light mode"
     const toggle = page
-      .getByRole("button", { name: /switch to dark mode/i })
+      .getByRole("button", { name: /switch to light mode/i })
       .first();
     await toggle.waitFor();
     await expect(toggle).toBeVisible();
     await toggle.click();
-    await expect(page.locator("html")).toHaveClass(/dark/);
+    await expect(page.locator("html")).not.toHaveClass(/dark/);
     await context.close();
   });
 
