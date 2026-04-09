@@ -7,6 +7,7 @@ import { useState } from "react";
 import { Send, CheckCircle } from "lucide-react";
 import SectionHeading from "@/components/ui/SectionHeading";
 import { HOUSE_TYPES, PROVINCES } from "@/lib/data";
+import { trackEvent } from "@/lib/analytics";
 
 const schema = z.object({
   name: z.string().min(2, "Vui lòng nhập họ tên"),
@@ -34,6 +35,14 @@ export default function QuoteForm({ houseTypes = HOUSE_TYPES }: { houseTypes?: s
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data),
+      });
+      trackEvent("form_submit", {
+        name: data.name,
+        phone: data.phone,
+        house_type: data.houseType,
+        province: data.province,
+        area: data.area || "",
+        note: data.note || "",
       });
       setSubmitted(true);
     } catch {

@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import { Phone } from "lucide-react";
 import { SITE_SETTINGS } from "@/lib/data";
+import { trackEvent } from "@/lib/analytics";
 
 export default function FloatingCTA() {
   const [visible, setVisible] = useState(false);
@@ -27,6 +28,7 @@ export default function FloatingCTA() {
         rel="noreferrer"
         title="Chat Zalo"
         aria-label="Liên hệ qua Zalo"
+        onClick={() => trackEvent('zalo_click')}
         className="group relative flex items-center justify-center w-12 h-12 bg-white hover:bg-gray-100 rounded-full shadow-lg transition-all hover:scale-110 animate-pulse"
       >
         <Image src="/zalo-logo.png" alt="Zalo" width={28} height={28} />
@@ -40,6 +42,7 @@ export default function FloatingCTA() {
         href={`tel:${SITE_SETTINGS.phoneRaw}`}
         title="Gọi ngay"
         aria-label="Gọi điện thoại"
+        onClick={() => trackEvent('phone_click')}
         className="group relative flex items-center justify-center w-12 h-12 bg-gold-500 hover:bg-gold-600 text-wood-800 rounded-full shadow-lg transition-all hover:scale-110 animate-pulse"
       >
         <Phone size={20} />

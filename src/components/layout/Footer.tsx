@@ -1,7 +1,10 @@
+"use client";
+
 import Link from "next/link";
 import { Phone, Mail, MapPin, Clock, Facebook } from "lucide-react";
 import { SITE_SETTINGS } from "@/lib/data";
 import type { SiteSettingsData } from "@/components/layout/Header";
+import { trackEvent } from "@/lib/analytics";
 
 export default function Footer({ siteSettings = SITE_SETTINGS }: { siteSettings?: SiteSettingsData }) {
   const phoneHref = siteSettings.phoneRaw ?? siteSettings.phone.replace(/\s/g, '');
@@ -42,7 +45,7 @@ export default function Footer({ siteSettings = SITE_SETTINGS }: { siteSettings?
               </li>
               <li className="flex gap-3">
                 <Phone size={16} className="text-gold-500 shrink-0" />
-                <a href={`tel:${phoneHref}`} className="hover:text-gold-500 transition-colors">
+                <a href={`tel:${phoneHref}`} onClick={() => trackEvent('phone_click')} className="hover:text-gold-500 transition-colors">
                   {siteSettings.phone}
                 </a>
               </li>

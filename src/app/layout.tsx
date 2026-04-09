@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Cormorant_Garamond, Be_Vietnam_Pro } from "next/font/google";
 import ThemeProvider from "@/components/providers/ThemeProvider";
+import GoogleAnalytics from "@/components/GoogleAnalytics";
 import { SITE_URL } from "@/lib/data";
 import "./globals.css";
 
@@ -73,6 +74,7 @@ export default function RootLayout({
   return (
     <html lang="vi" className={`${cormorant.variable} ${beVietnam.variable}`} suppressHydrationWarning>
       <body className="font-be-vietnam bg-wood-50 dark:bg-wood-800 text-gray-900 dark:text-wood-100 antialiased">
+        <GoogleAnalytics />
         <ThemeProvider>{children}</ThemeProvider>
       </body>
     </html>

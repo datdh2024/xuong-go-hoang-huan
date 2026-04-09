@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation";
 import { Phone, Menu, X } from "lucide-react";
 import { SITE_SETTINGS } from "@/lib/data";
 import ThemeToggle from "@/components/ui/ThemeToggle";
+import { trackEvent } from "@/lib/analytics";
 
 export interface SiteSettingsData {
   companyName: string;
@@ -78,6 +79,7 @@ export default function Header({ siteSettings = SITE_SETTINGS }: { siteSettings?
           <ThemeToggle />
           <a
             href={`tel:${(siteSettings.phoneRaw ?? siteSettings.phone.replace(/\s/g, ''))}`}
+            onClick={() => trackEvent('phone_click')}
             className="flex items-center gap-2 bg-gold-500 hover:bg-gold-600 text-wood-800 font-semibold text-sm px-4 py-2 rounded transition-colors"
           >
             <Phone size={16} />
@@ -123,6 +125,7 @@ export default function Header({ siteSettings = SITE_SETTINGS }: { siteSettings?
             ))}
             <a
               href={`tel:${(siteSettings.phoneRaw ?? siteSettings.phone.replace(/\s/g, ''))}`}
+              onClick={() => trackEvent('phone_click')}
               className={`flex items-center gap-2 bg-gold-500 text-wood-800 font-semibold text-sm px-4 py-2 rounded w-fit transition-all duration-300 ${
                 mobileOpen
                   ? "translate-x-0 opacity-100"

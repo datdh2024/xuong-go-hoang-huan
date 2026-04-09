@@ -6,6 +6,7 @@ import { getProjectBySlug, getAllProjects } from "@/sanity/lib/fetchers";
 import { notFound } from "next/navigation";
 import { generateBreadcrumbJsonLd } from "@/lib/seo";
 import ImageGallery from "@/components/ui/ImageGallery";
+import TrackProjectView from "@/components/analytics/TrackProjectView";
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -44,6 +45,7 @@ export default async function ProjectDetailPage({ params }: Props) {
 
   return (
     <div className="pt-24">
+      <TrackProjectView slug={slug} />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
