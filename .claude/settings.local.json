@@ -85,7 +85,8 @@
       "Read(//tmp/**)",
       "Bash(identify /tmp/og-image.jpg)",
       "Bash(python3 -c \"from PIL import Image; img=Image.open\\('/tmp/og-image.jpg'\\); print\\(f'{img.size[0]}x{img.size[1]}'\\)\")",
-      "Bash(npx next:*)"
+      "Bash(npx next:*)",
+      "Bash(python3 -c \"import sys,urllib.parse; [print\\(urllib.parse.unquote\\(l.strip\\(\\)\\)\\) for l in sys.stdin]\")"
     ]
   },
   "hooks": {

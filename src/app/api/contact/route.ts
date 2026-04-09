@@ -24,9 +24,9 @@ Ghi chú: ${note || "Không có"}
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        from: "datdh2024@gmail.com",
+        from: "onboarding@resend.dev",
         to: process.env.CONTACT_EMAIL,
-        subject: `[Báo giá] ${name} - ${houseType} - ${province}`,
+        subject: `[Yêu Cầu Báo giá] ${name} - ${houseType} - ${province}`,
         text: body,
       }),
     });

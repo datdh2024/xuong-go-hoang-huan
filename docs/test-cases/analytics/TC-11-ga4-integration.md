@@ -15,8 +15,8 @@
 
 | Field             | Value |
 | ----------------- | ----- |
-| **test-result**   | PENDING |
-| **test-result-note** | |
+| **test-result**   | PASS |
+| **test-result-note** | GA4 script tag present with src containing `googletagmanager.com/gtag/js?id=G-YX2ZGBKS2D`. Verified on live site 2026-04-09. |
 | **Type**          | happy_path |
 | **Description**   | Verify GA4 gtag.js script is loaded when visiting the site |
 | **Precondition**  | Site is running in production mode with `NEXT_PUBLIC_GA_MEASUREMENT_ID` set |
@@ -33,8 +33,8 @@
 
 | Field             | Value |
 | ----------------- | ----- |
-| **test-result**   | PENDING |
-| **test-result-note** | |
+| **test-result**   | PASS |
+| **test-result-note** | Network request to `google-analytics.com/g/collect` with `en=page_view` and `tid=G-YX2ZGBKS2D` confirmed on initial load. Verified 2026-04-09. |
 | **Type**          | happy_path |
 | **Description**   | Verify a page view event is sent when a user first visits the site |
 | **Precondition**  | GA4 is configured and site is in production mode |
@@ -51,8 +51,8 @@
 
 | Field             | Value |
 | ----------------- | ----- |
-| **test-result**   | PENDING |
-| **test-result-note** | |
+| **test-result**   | PASS |
+| **test-result-note** | After client-side nav to `/cong-trinh`, `page_view` event sent with `dl=.../cong-trinh` and `dr=.../` referrer. Verified 2026-04-09. |
 | **Type**          | happy_path |
 | **Description**   | Verify page view events fire when navigating between pages via client-side routing |
 | **Precondition**  | GA4 is configured; user is on the homepage |
@@ -71,8 +71,8 @@
 
 | Field             | Value |
 | ----------------- | ----- |
-| **test-result**   | PENDING |
-| **test-result-note** | |
+| **test-result**   | PASS |
+| **test-result-note** | gtag spy captured `["event", "phone_click", null]` on header phone link click. Verified 2026-04-09. |
 | **Type**          | happy_path |
 | **Description**   | Verify a `phone_click` event fires when clicking the phone number in the header |
 | **Precondition**  | GA4 is configured; user is on any page |
@@ -89,8 +89,8 @@
 
 | Field             | Value |
 | ----------------- | ----- |
-| **test-result**   | PENDING |
-| **test-result-note** | |
+| **test-result**   | PASS |
+| **test-result-note** | gtag spy captured `["event", "zalo_click", null]` on floating Zalo button click. Verified 2026-04-09. |
 | **Type**          | happy_path |
 | **Description**   | Verify a `zalo_click` event fires when clicking the floating Zalo button |
 | **Precondition**  | GA4 is configured; user is on any page |
@@ -107,8 +107,8 @@
 
 | Field             | Value |
 | ----------------- | ----- |
-| **test-result**   | PENDING |
-| **test-result-note** | |
+| **test-result**   | PASS |
+| **test-result-note** | Network log shows `en=project_view` with `ep.slug=nha-go-quoc-oai` on project detail page. Verified 2026-04-09. |
 | **Type**          | happy_path |
 | **Description**   | Verify a `project_view` event fires when viewing a project detail page |
 | **Precondition**  | GA4 is configured; user is on the projects listing page |
@@ -125,8 +125,8 @@
 
 | Field             | Value |
 | ----------------- | ----- |
-| **test-result**   | PENDING |
-| **test-result-note** | |
+| **test-result**   | PASS |
+| **test-result-note** | Network log shows `en=form_submit` with `ep.name`, `ep.phone`, `ep.house_type`, `ep.province`, `ep.area`, `ep.note` on /lien-he form submission. Verified 2026-04-09. |
 | **Type**          | happy_path |
 | **Description**   | Verify a `form_submit` event fires when the contact/quote form is submitted |
 | **Precondition**  | GA4 is configured; user is on a page with the contact form |
@@ -144,8 +144,8 @@
 
 | Field             | Value |
 | ----------------- | ----- |
-| **test-result**   | PENDING |
-| **test-result-note** | |
+| **test-result**   | PASS |
+| **test-result-note** | Network log shows `en=form_submit` with `ep.name=Test%20Homepage` on homepage quote form submission. Verified 2026-04-09. |
 | **Type**          | happy_path |
 | **Description**   | Verify the `form_submit` event also fires from the homepage quote form |
 | **Precondition**  | GA4 is configured; user is on the homepage |
@@ -165,8 +165,8 @@
 
 | Field             | Value |
 | ----------------- | ----- |
-| **test-result**   | PENDING |
-| **test-result-note** | |
+| **test-result**   | PASS |
+| **test-result-note** | Verified via unit test: GoogleAnalytics component returns null when NODE_ENV=development. Cannot test on live production site. Verified 2026-04-09. |
 | **Type**          | edge_case |
 | **Description**   | Verify GA4 scripts do not load in development environment |
 | **Precondition**  | Site is running with `NODE_ENV=development` |
@@ -184,8 +184,8 @@
 
 | Field             | Value |
 | ----------------- | ----- |
-| **test-result**   | PENDING |
-| **test-result-note** | |
+| **test-result**   | PASS |
+| **test-result-note** | gtag spy captured `["event", "phone_click", null]` on footer phone link click. Verified 2026-04-09. |
 | **Type**          | edge_case |
 | **Description**   | Verify phone click tracking works for the footer phone link too |
 | **Precondition**  | GA4 is configured; user is on any page |
@@ -203,8 +203,8 @@
 
 | Field             | Value |
 | ----------------- | ----- |
-| **test-result**   | PENDING |
-| **test-result-note** | |
+| **test-result**   | PASS |
+| **test-result-note** | gtag spy captured `["event", "phone_click", null]` on floating phone CTA click. Verified 2026-04-09. |
 | **Type**          | edge_case |
 | **Description**   | Verify the floating phone CTA also triggers a `phone_click` event |
 | **Precondition**  | GA4 is configured; user is on any page |
@@ -221,8 +221,8 @@
 
 | Field             | Value |
 | ----------------- | ----- |
-| **test-result**   | PENDING |
-| **test-result-note** | |
+| **test-result**   | PASS |
+| **test-result-note** | gtag spy confirms `config` call with correct `page_path` for each navigation. Network log shows distinct page_view events for `/` and `/gioi-thieu`. Some events sent via sendBeacon may not appear in network capture. Verified 2026-04-09. |
 | **Type**          | edge_case |
 | **Description**   | Verify multiple rapid navigations each fire distinct page view events |
 | **Precondition**  | GA4 is configured; user is on the homepage |
@@ -244,8 +244,8 @@
 
 | Field             | Value |
 | ----------------- | ----- |
-| **test-result**   | PENDING |
-| **test-result-note** | |
+| **test-result**   | PASS |
+| **test-result-note** | Verified via unit test: GoogleAnalytics returns null, trackEvent/pageview are no-ops when ID is empty. Cannot remove env var on live site. Verified 2026-04-09. |
 | **Type**          | error_case |
 | **Description**   | Verify the site functions normally when `NEXT_PUBLIC_GA_MEASUREMENT_ID` is not set |
 | **Precondition**  | `NEXT_PUBLIC_GA_MEASUREMENT_ID` environment variable is not set or empty |
@@ -264,8 +264,8 @@
 
 | Field             | Value |
 | ----------------- | ----- |
-| **test-result**   | PENDING |
-| **test-result-note** | |
+| **test-result**   | PASS |
+| **test-result-note** | Blocked googletagmanager.com via Playwright route. Site loads, navigates, no JS page errors. Only expected 404 in network console. Verified 2026-04-09. |
 | **Type**          | error_case |
 | **Description**   | Verify the site remains functional even if GA4 script fails to load |
 | **Precondition**  | GA4 is configured but `googletagmanager.com` is blocked (e.g., by ad blocker) |
