@@ -1,8 +1,9 @@
-import type { Metadata } from "next";
-import { Cormorant_Garamond, Be_Vietnam_Pro } from "next/font/google";
-import ThemeProvider from "@/components/providers/ThemeProvider";
 import GoogleAnalytics from "@/components/GoogleAnalytics";
+import ThemeProvider from "@/components/providers/ThemeProvider";
 import { SITE_URL } from "@/lib/data";
+import { Analytics } from "@vercel/analytics/react";
+import type { Metadata } from "next";
+import { Be_Vietnam_Pro, Cormorant_Garamond } from "next/font/google";
 import "./globals.css";
 
 const cormorant = Cormorant_Garamond({
@@ -72,10 +73,15 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="vi" className={`${cormorant.variable} ${beVietnam.variable}`} suppressHydrationWarning>
+    <html
+      lang="vi"
+      className={`${cormorant.variable} ${beVietnam.variable}`}
+      suppressHydrationWarning
+    >
       <body className="font-be-vietnam bg-wood-50 dark:bg-wood-800 text-gray-900 dark:text-wood-100 antialiased">
         <GoogleAnalytics />
         <ThemeProvider>{children}</ThemeProvider>
+        <Analytics />
       </body>
     </html>
   );
